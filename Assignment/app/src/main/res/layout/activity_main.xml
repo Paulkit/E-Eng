@@ -10,8 +10,64 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.anthony.assignment.MainActivity">
 
+    <Button
+        android:text="@string/btn_syllabary"
+        android:layout_marginTop="48dp"
+        android:id="@+id/btn_syllabary"
+        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:fontFamily="sans-serif-medium"
+        android:onClick="showSyllabary"
+        android:layout_below="@+id/Title"
+        android:layout_centerHorizontal="true"
+        android:textSize="18sp" />
+
+    <Button
+        android:text="@string/btn_quiz"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:id="@+id/btn_quiz"
+        android:layout_below="@+id/btn_syllabary"
+        android:layout_alignLeft="@+id/btn_syllabary"
+        android:layout_alignStart="@+id/btn_syllabary"
+        android:textSize="18sp"
+        android:onClick="showQuiz" />
+
+    <Button
+        android:text="@string/btn_highscore"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_highscore"
+        android:textSize="18sp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/btn_quiz"
+        android:layout_alignLeft="@+id/btn_quiz"
+        android:layout_alignStart="@+id/btn_quiz"
+        android:onClick="showHighScore" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:layout_marginTop="67dp"
+        android:id="@+id/Title"
+        android:textSize="30sp"
+        android:fontFamily="serif"
+        android:textStyle="normal|bold"
+        android:text="@string/title"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="@string/btn_quit"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_quit"
+        android:onClick="quit"
+        android:textSize="18sp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/btn_highscore"
+        android:layout_alignStart="@+id/btn_highscore"
+        android:layout_marginBottom="32dp" />
+
 </RelativeLayout>
