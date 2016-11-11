@@ -1,14 +1,12 @@
 package com.example.anthony.assignment;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
-
-
-    //https://ssl.gstatic.com/dictionary/static/sounds/de/0/[word].mp3
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +15,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showSyllabary(View view){
-
+        Intent i = new Intent(this, syllabary.class);
+        startActivity(i);
     }
 
     public void showQuiz(View view){
