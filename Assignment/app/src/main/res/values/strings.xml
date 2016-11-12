@@ -5,4 +5,6 @@
     <string name="btn_quit">Quit</string>
     <string name="btn_quiz">Quiz</string>
     <string name="btn_highscore">High Score</string>
+    <string name="signin_other_error">signin_other_error</string>
+    <string name="signin_failure">signin_failure</string>
 </resources>
