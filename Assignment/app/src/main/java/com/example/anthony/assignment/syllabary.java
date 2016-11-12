@@ -3,6 +3,9 @@ package com.example.anthony.assignment;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 public class syllabary extends AppCompatActivity {
 
@@ -15,8 +18,13 @@ public class syllabary extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_syllabary);
+
+    }
+
+    public void playSyllabary(View view){
+        TextView tv = (TextView) view;
         try {
-            playAudio("https://ssl.gstatic.com/dictionary/static/sounds/de/0/a.mp3");
+            playAudio("https://ssl.gstatic.com/dictionary/static/sounds/de/0/"+tv.getText().toString()+".mp3");
         } catch (Exception e) {
             e.printStackTrace();
         }

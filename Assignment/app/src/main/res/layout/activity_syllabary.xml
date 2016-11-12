@@ -20,7 +20,8 @@
             android:layout_marginLeft="2dp"
             android:id="@+id/text_a"
             android:textStyle="normal|bold"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:onClick="playSyllabary" />
 
         <TextView
             android:layout_weight="1"
@@ -33,7 +34,8 @@
             android:layout_marginLeft="2dp"
             android:id="@+id/text_b"
             android:textStyle="normal|bold"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:onClick="playSyllabary" />
 
         <TextView
             android:layout_weight="1"
@@ -46,7 +48,8 @@
             android:layout_marginLeft="2dp"
             android:id="@+id/text_c"
             android:textStyle="normal|bold"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:onClick="playSyllabary" />
 
         <TextView
             android:layout_weight="1"
@@ -59,7 +62,8 @@
             android:layout_marginRight="2dp"
             android:id="@+id/text_d"
             android:textStyle="normal|bold"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:onClick="playSyllabary" />
 
     </TableRow>
 
@@ -79,7 +83,8 @@
             android:layout_marginLeft="2dp"
             android:id="@+id/text_e"
             android:textStyle="normal|bold"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:onClick="playSyllabary" />
 
         <TextView
             android:layout_weight="1"
@@ -92,7 +97,8 @@
             android:layout_marginLeft="2dp"
             android:id="@+id/text_f"
             android:textStyle="normal|bold"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:onClick="playSyllabary" />
 
         <TextView
             android:layout_weight="1"
@@ -105,7 +111,8 @@
             android:layout_marginLeft="2dp"
             android:id="@+id/text_g"
             android:textStyle="normal|bold"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:onClick="playSyllabary" />
 
         <TextView
             android:layout_weight="1"
@@ -118,7 +125,8 @@
             android:layout_marginRight="2dp"
             android:id="@+id/text_h"
             android:textStyle="normal|bold"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:onClick="playSyllabary" />
 
     </TableRow>
 
@@ -138,7 +146,8 @@
             android:layout_marginLeft="2dp"
             android:id="@+id/text_i"
             android:textStyle="normal|bold"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:onClick="playSyllabary" />
 
         <TextView
             android:layout_weight="1"
@@ -151,7 +160,8 @@
             android:layout_marginLeft="2dp"
             android:id="@+id/text_j"
             android:textStyle="normal|bold"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:onClick="playSyllabary" />
 
         <TextView
             android:layout_weight="1"
@@ -164,7 +174,8 @@
             android:layout_marginLeft="2dp"
             android:id="@+id/text_k"
             android:textStyle="normal|bold"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:onClick="playSyllabary" />
 
         <TextView
             android:layout_weight="1"
@@ -177,7 +188,8 @@
             android:layout_marginRight="2dp"
             android:id="@+id/text_l"
             android:textStyle="normal|bold"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:onClick="playSyllabary" />
 
     </TableRow>
 
@@ -197,7 +209,8 @@
             android:layout_marginLeft="2dp"
             android:id="@+id/text_m"
             android:textStyle="normal|bold"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:onClick="playSyllabary" />
 
         <TextView
             android:layout_weight="1"
@@ -210,7 +223,8 @@
             android:layout_marginLeft="2dp"
             android:id="@+id/text_n"
             android:textStyle="normal|bold"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:onClick="playSyllabary" />
 
         <TextView
             android:layout_weight="1"
@@ -223,7 +237,8 @@
             android:layout_marginLeft="2dp"
             android:id="@+id/text_o"
             android:textStyle="normal|bold"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:onClick="playSyllabary" />
 
         <TextView
             android:layout_weight="1"
@@ -236,7 +251,8 @@
             android:layout_marginRight="2dp"
             android:id="@+id/text_p"
             android:textStyle="normal|bold"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:onClick="playSyllabary" />
 
     </TableRow>
 
@@ -256,7 +272,8 @@
             android:layout_marginLeft="2dp"
             android:id="@+id/text_q"
             android:textStyle="normal|bold"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:onClick="playSyllabary" />
 
         <TextView
             android:layout_weight="1"
@@ -269,7 +286,8 @@
             android:layout_marginLeft="2dp"
             android:id="@+id/text_r"
             android:textStyle="normal|bold"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:onClick="playSyllabary" />
 
         <TextView
             android:layout_weight="1"
@@ -282,7 +300,8 @@
             android:layout_marginLeft="2dp"
             android:id="@+id/text_s"
             android:textStyle="normal|bold"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:onClick="playSyllabary" />
 
         <TextView
             android:layout_weight="1"
@@ -295,7 +314,8 @@
             android:layout_marginRight="2dp"
             android:id="@+id/text_t"
             android:textStyle="normal|bold"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:onClick="playSyllabary" />
 
     </TableRow>
 
@@ -316,7 +336,8 @@
         android:layout_marginLeft="2dp"
         android:id="@+id/text_u"
         android:textStyle="normal|bold"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:onClick="playSyllabary" />
 
     <TextView
         android:layout_weight="1"
@@ -329,7 +350,8 @@
         android:layout_marginLeft="2dp"
         android:id="@+id/text_v"
         android:textStyle="normal|bold"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:onClick="playSyllabary" />
 
     <TextView
         android:layout_weight="1"
@@ -342,7 +364,8 @@
         android:layout_marginLeft="2dp"
         android:id="@+id/text_w"
         android:textStyle="normal|bold"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:onClick="playSyllabary" />
 
     <TextView
         android:layout_weight="1"
@@ -355,7 +378,8 @@
         android:layout_marginRight="2dp"
         android:id="@+id/text_x"
         android:textStyle="normal|bold"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:onClick="playSyllabary" />
 
     </TableRow>
 
@@ -376,7 +400,8 @@
         android:layout_marginLeft="2dp"
         android:id="@+id/text_y"
         android:textStyle="normal|bold"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:onClick="playSyllabary" />
 
     <TextView
         android:layout_weight="1"
@@ -389,7 +414,8 @@
         android:layout_marginLeft="2dp"
         android:id="@+id/text_z"
         android:textStyle="normal|bold"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:onClick="playSyllabary" />
 
     <TextView
         android:layout_weight="1"
