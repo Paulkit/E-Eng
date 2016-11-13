@@ -69,7 +69,8 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     public void showQuiz(View view) {
-
+        Intent i = new Intent(this, QuizSelections.class);
+        startActivity(i);
     }
 
     public void showHighScore(View view) {
