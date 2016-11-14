@@ -16,8 +16,8 @@ public class MainActivity extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
     private GoogleApiClient mGoogleApiClient;
-
-
+    private com.wang.avi.AVLoadingIndicatorView prograss_indecator;
+private static int REQUEST_LEADERBOARD = 100; //  indeed an arbitrary int that you define by yourself.
 
     private static int RC_SIGN_IN = 9001;
 
@@ -30,15 +30,15 @@ public class MainActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setTitle("Learning English");
-
+        prograss_indecator = (com.wang.avi.AVLoadingIndicatorView) findViewById(R.id.avi);
         // Create the Google Api Client with access to the Play Games services
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
+     /*   mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(Games.API).addScope(Games.SCOPE_GAMES)
                 // add other APIs and scopes here as needed
                 .build();
-
+*/
 
     }
 
@@ -115,6 +115,9 @@ public class MainActivity extends AppCompatActivity implements
                     mGoogleApiClient, connectionResult,
                     RC_SIGN_IN, String.valueOf(R.string.signin_other_error))) {
                 mResolvingConnectionFailure = false;
+                // prograss_indecator
+                startActivityForResult(Games.Leaderboards.getLeaderboardIntent(mGoogleApiClient,
+                       getString( R.string.LEADER_BOARD)), REQUEST_LEADERBOARD);
             }
         }
 

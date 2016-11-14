@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
@@ -11,63 +12,74 @@
     tools:context="com.example.anthony.assignment.MainActivity">
 
     <Button
-        android:text="@string/btn_syllabary"
-        android:layout_marginTop="48dp"
         android:id="@+id/btn_syllabary"
-        android:layout_height="wrap_content"
         android:layout_width="300dp"
-        android:fontFamily="sans-serif-medium"
-        android:onClick="showSyllabary"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/Title"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="48dp"
+        android:fontFamily="sans-serif-medium"
+        android:onClick="showSyllabary"
+        android:text="@string/btn_syllabary"
         android:textSize="18sp" />
 
     <Button
-        android:text="@string/btn_quiz"
+        android:id="@+id/btn_quiz"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:id="@+id/btn_quiz"
-        android:layout_below="@+id/btn_syllabary"
         android:layout_alignLeft="@+id/btn_syllabary"
         android:layout_alignStart="@+id/btn_syllabary"
-        android:textSize="18sp"
-        android:onClick="showQuiz" />
+        android:layout_below="@+id/btn_syllabary"
+        android:layout_marginTop="20dp"
+        android:onClick="showQuiz"
+        android:text="@string/btn_quiz"
+        android:textSize="18sp" />
 
     <Button
-        android:text="@string/btn_highscore"
+        android:id="@+id/btn_highscore"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_highscore"
-        android:textSize="18sp"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/btn_quiz"
         android:layout_alignLeft="@+id/btn_quiz"
         android:layout_alignStart="@+id/btn_quiz"
-        android:onClick="showHighScore" />
+        android:layout_below="@+id/btn_quiz"
+        android:layout_marginTop="20dp"
+        android:onClick="showHighScore"
+        android:text="@string/btn_highscore"
+        android:textSize="18sp" />
 
     <TextView
+        android:id="@+id/Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="67dp"
-        android:id="@+id/Title"
-        android:textSize="30sp"
-        android:fontFamily="serif"
-        android:textStyle="normal|bold"
-        android:text="@string/title"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="67dp"
+        android:fontFamily="serif"
+        android:text="@string/title"
+        android:textSize="30sp"
+        android:textStyle="normal|bold" />
 
     <Button
-        android:text="@string/btn_quit"
+        android:id="@+id/btn_quit"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_quit"
-        android:onClick="quit"
-        android:textSize="18sp"
-        android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/btn_highscore"
+        android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/btn_highscore"
-        android:layout_marginBottom="32dp" />
+        android:layout_marginBottom="32dp"
+        android:onClick="quit"
+        android:text="@string/btn_quit"
+        android:textSize="18sp" />
 
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/avi"
+
+        style="@style/AVLoadingIndicatorView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:indicatorColor="@color/colorPrimary"
+        app:indicatorName="BallPulseIndicator"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
 </RelativeLayout>

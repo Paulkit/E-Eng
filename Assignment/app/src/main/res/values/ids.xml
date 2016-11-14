@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_id">874511136746</string>
 
+    <string name="app_id">874511136746</string>
     <string name="achievement_Reach_10">CgkI6u-z57kZEAIQAQ</string>
     <string name="achievement_Reach_50">CgkI6u-z57kZEAIQAg</string>
     <string name="achievement_Reach_100">CgkI6u-z57kZEAIQAw</string>
