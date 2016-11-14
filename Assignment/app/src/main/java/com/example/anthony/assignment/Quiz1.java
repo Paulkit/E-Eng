@@ -57,9 +57,15 @@ public class Quiz1 extends AppCompatActivity {
                 JSONObject json = new JSONObject(stringBuilder.toString());
                 JSONObject metadata  = json.getJSONObject("metadata");
                 String total = metadata.getString("total");
-                int totalNumOfWords = Integer.parseInt(total);
+                Log.i("Total of words :",total);
 
-            Log.i("total:",total);
+                JSONArray Words  = json.getJSONArray("results");
+                for (int i = 0; i < Words.length(); i++) {
+                    JSONObject jsonobject = Words.getJSONObject(i);
+                    String word = jsonobject.getString("word");
+                    Log.i("Word["+i+"]:",word);
+                }
+
                 return stringBuilder.toString();
 
             }
