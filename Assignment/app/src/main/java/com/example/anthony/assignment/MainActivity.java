@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.View;
 
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
 import com.google.example.games.basegameutils.BaseGameUtils;
@@ -46,13 +45,13 @@ private static int REQUEST_LEADERBOARD = 100; //  indeed an arbitrary int that y
     @Override
     protected void onStart() {
         super.onStart();
-        mGoogleApiClient.connect();
+     //   mGoogleApiClient.connect();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        mGoogleApiClient.disconnect();
+    //    mGoogleApiClient.disconnect();
     }
 
 
@@ -60,7 +59,7 @@ private static int REQUEST_LEADERBOARD = 100; //  indeed an arbitrary int that y
     public void onResume() {
         super.onResume();
         Log.i("paul", "onResume");
-        GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplicationContext());
+      //   GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplicationContext());
     }
 
     public void showSyllabary(View view) {
@@ -74,8 +73,8 @@ private static int REQUEST_LEADERBOARD = 100; //  indeed an arbitrary int that y
     }
 
     public void showHighScore(View view) {
-        mSignInClicked = true;
-        mGoogleApiClient.connect();
+     //   mSignInClicked = true;
+     //   mGoogleApiClient.connect();
     }
 
     public void quit(View view) {
@@ -89,7 +88,6 @@ private static int REQUEST_LEADERBOARD = 100; //  indeed an arbitrary int that y
 
     @Override
     public void onConnectionSuspended(int i) {
-        // Attempt to reconnect
         mGoogleApiClient.connect();
     }
     @Override
