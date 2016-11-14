@@ -1,23 +1,41 @@
 package com.example.anthony.assignment;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Xml;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xmlpull.v1.XmlSerializer;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
 
 import javax.net.ssl.HttpsURLConnection;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 public class Quiz1 extends AppCompatActivity {
 
@@ -28,32 +46,123 @@ public class Quiz1 extends AppCompatActivity {
     private int fileNumber = 0;
     private int diff = 1;
     Button button_Start;
+    TextView tv_Score;
     String domain = "";
     ArrayList<WordData> words = new ArrayList<WordData>();
+    final String domains[] = {"Sport", "Art", "Literature", "Music", "Variety", "Architecture"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz1);
         button_Start = (Button) findViewById(R.id.button_Start);
+        tv_Score = (TextView) findViewById(R.id.tv_Score);
         setTitle("Quiz 1");
-        new CallbackTask().execute(wordlist());
-
-    }
-
-    private String wordlist() {
-        final String language = "en";
-        final String domains[] = {"Sport", "Art", "Literature", "Music", "Variety", "Architecture"};
-
-
+        Random r = new Random();
         int min = 0;
         int max = domains.length;
-
-        Random r = new Random();
         //domain = domains[r.nextInt(max - min + 1) + min];
         domain = domains[0];
+
+        if (readDataFromFile(domain + ".xml") == false) {
+            new CallbackTask().execute(wordlist());
+        } else {
+            domParseXML(getStringFromFile(domain + ".xml"));
+            button_Start.setVisibility(View.VISIBLE);
+            Log.i("1", words.get(0).getName());
+            Log.i("1", words.get(0).getDefinitions().get(0).toString());
+            Log.i("1", words.get(0).getDefinitions().get(1).toString());
+        }
+
+    }
+    public void startQuiz(View view) {
+        int score = 0;
+        button_Start.setVisibility(View.INVISIBLE);
+        tv_Score.setVisibility(View.VISIBLE);
+        tv_Score.setText("Score:    "+score);
+    }
+    private String wordlist() {
+        final String language = "en";
         final String filters = "lexicalCategory=noun,adjective;domains=" + domain;
         return "https://od-api.oxforddictionaries.com:443/api/v1/wordlist/" + language + "/" + filters;
+    }
+
+    private void writeDataToFile(String filename, String data) {
+        try {
+            FileOutputStream fout = openFileOutput(filename, Context.MODE_PRIVATE);
+            fout.write(data.getBytes());
+            fout.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void domParseXML(String XMLString) {
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+        DocumentBuilder db = null;
+        try {
+            db = dbf.newDocumentBuilder();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        }
+        Document doc = null;
+        try {
+            doc = db.parse(new InputSource(new StringReader(XMLString)));
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Element root = doc.getDocumentElement();
+        NodeList wordsNodeList = root.getElementsByTagName("word");
+        for (int i = 0; i < wordsNodeList.getLength(); i++) {
+            Element word = (Element) wordsNodeList.item(i);
+            String name = word.getAttribute("name");
+            String id = word.getAttribute("id");
+            int numberOfDefinitions = Integer.parseInt(word.getAttribute("numberOfDefinitions"));
+            words.add(new WordData(id, name));
+
+            for (int a = 0; a < numberOfDefinitions; a++) {
+                words.get(i).getDefinitions().add(word.getElementsByTagName("definition"+a).item(0).getFirstChild().getNodeValue());
+
+            }
+        }
+    }
+
+    private String getStringFromFile(String filename) {
+        String result = null;
+        try {
+            StringBuilder sb = new StringBuilder();
+            FileInputStream fin = openFileInput(filename);
+            byte[] data = new byte[fin.available()];
+            while (fin.read(data) != -1) {
+                sb.append(new String(data));
+            }
+            fin.close();
+            result = sb.toString();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    private boolean readDataFromFile(String filename) {
+        try {
+            StringBuilder sb = new StringBuilder();
+            FileInputStream fin = openFileInput(filename);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     private class CallbackTask extends AsyncTask<String, Integer, String> {
@@ -136,7 +245,6 @@ public class Quiz1 extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
-
             barProgressDialog = new ProgressDialog(Quiz1.this);
 
             barProgressDialog.setTitle(DialogTitle);
@@ -158,18 +266,51 @@ public class Quiz1 extends AppCompatActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            for (int i = 0; i < words.size(); i++) {
+            XmlSerializer serializer = Xml.newSerializer();
+            // for (int i = 0; i < words.size(); i++) {
 
-                for (int a = 0; a < words.get(i).getDefinitions().size(); a++) {
-                    System.out.println(words.get(i).getName() + ":  " + words.get(i).getDefinitions().get(a));
+            //  for (int a = 0; a < words.get(i).getDefinitions().size(); a++) {
+            // System.out.println(words.get(i).getName() + ":  " + words.get(i).getDefinitions().get(a));
+
+            try {
+                FileOutputStream fout = openFileOutput(domain + ".xml", Context.MODE_PRIVATE);
+                serializer.setOutput(fout, "UTF-8");
+                serializer.startDocument(null, Boolean.valueOf(true));
+                serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+                serializer.startTag(null, "words");
+                for (int i = 0; i < words.size(); i++) {
+                    serializer.startTag(null, "word");
+                    serializer.attribute(null, "name", words.get(i).getName());
+                    serializer.attribute(null, "id", words.get(i).getId());
+                    serializer.attribute(null, "numberOfDefinitions", Integer.toString(words.get(i).getDefinitions().size()));
+
+                    for (int a = 0; a < words.get(i).getDefinitions().size(); a++) {
+
+                        serializer.startTag(null, "definition" + a);
+                        serializer.text(words.get(i).getDefinitions().get(a));
+                        serializer.endTag(null, "definition" + a);
+
+                    }
+                    serializer.endTag(null, "word");
                 }
-
+                serializer.endTag(null, "words");
+                serializer.endDocument();
+                //write xml data into the FileOutputStream
+                serializer.flush();
+                //finally we close the file stream
+                fout.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
 
             barProgressDialog.dismiss();
             setTitle(domain);
             button_Start.setVisibility(View.VISIBLE);
-
+            Log.i("0", words.get(0).getName());
+            Log.i("0", words.get(0).getDefinitions().get(0).toString());
+            Log.i("0", words.get(0).getDefinitions().get(1).toString());
         }
     }
 }
