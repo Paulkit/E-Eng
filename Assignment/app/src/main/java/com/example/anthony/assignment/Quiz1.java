@@ -1,9 +1,12 @@
 package com.example.anthony.assignment;
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -18,6 +21,13 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class Quiz1 extends AppCompatActivity {
 
+    private final CharSequence DialogTitle = "Loading";
+    private final CharSequence DialogMessage = "Wait to load data...";
+
+    private ProgressDialog barProgressDialog;
+    private int fileNumber = 0;
+    private int diff = 1;
+    Button button_Start;
     String domain = "";
     ArrayList<WordData> words = new ArrayList<WordData>();
 
@@ -25,8 +35,10 @@ public class Quiz1 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz1);
+        button_Start = (Button) findViewById(R.id.button_Start);
+        setTitle("Quiz 1");
         new CallbackTask().execute(wordlist());
-        setTitle(domain);
+
     }
 
     private String wordlist() {
@@ -48,7 +60,7 @@ public class Quiz1 extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-
+            int progress = 0;
             //TODO: replace with your own app id and app key
             final String app_id = "25e078c4";
             final String app_key = "99015df7c1045e3f566fd76780eb3cf9";
@@ -73,6 +85,8 @@ public class Quiz1 extends AppCompatActivity {
                 Log.i("Total of words", total);
 
                 JSONArray results = json.getJSONArray("results");
+
+                barProgressDialog.setMax(results.length());
                 for (int i = 0; i < results.length(); i++) {
                     JSONObject jsonobject = results.getJSONObject(i);
                     words.add(new WordData(jsonobject.getString("id"), jsonobject.getString("word")));
@@ -105,9 +119,12 @@ public class Quiz1 extends AppCompatActivity {
                         for (int a = 0; a < sensesArray.length(); a++) {
                             if (sensesArray.getJSONObject(a).has("definitions")) {
                                 words.get(index).getDefinitions().add(sensesArray.getJSONObject(a).getJSONArray("definitions").getString(0));
-                            }else break;
+                            } else break;
                         }
                     }
+                    publishProgress(Integer.valueOf(progress));
+                    progress++;
+
                 }
                 return stringBuilder.toString();
 
@@ -118,18 +135,40 @@ public class Quiz1 extends AppCompatActivity {
         }
 
         @Override
+        protected void onPreExecute() {
+
+            barProgressDialog = new ProgressDialog(Quiz1.this);
+
+            barProgressDialog.setTitle(DialogTitle);
+            barProgressDialog.setMessage(DialogMessage);
+            barProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            barProgressDialog.setProgress(0);
+            barProgressDialog.setMax(0);
+            barProgressDialog.show();
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... progress) {
+            barProgressDialog.incrementProgressBy(diff);
+            super.onProgressUpdate(progress);
+        }
+
+        @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            for (int i = 0;i<words.size();i++){
+            for (int i = 0; i < words.size(); i++) {
 
-                for (int a = 0;a<words.get(i).getDefinitions().size();a++)
-                {
-                    System.out.println(words.get(i).getName()+":  "+words.get(i).getDefinitions().get(a));
+                for (int a = 0; a < words.get(i).getDefinitions().size(); a++) {
+                    System.out.println(words.get(i).getName() + ":  " + words.get(i).getDefinitions().get(a));
+                }
+
             }
 
-            }
-           // System.out.println(result);
+            barProgressDialog.dismiss();
+            setTitle(domain);
+            button_Start.setVisibility(View.VISIBLE);
 
         }
     }
