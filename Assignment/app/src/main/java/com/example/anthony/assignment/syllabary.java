@@ -18,7 +18,7 @@ public class syllabary extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_syllabary);
-
+        setTitle("Syllabary");
     }
 
     public void playSyllabary(View view){
