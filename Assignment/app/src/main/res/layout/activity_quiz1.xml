@@ -27,13 +27,71 @@
         />
 
     <TextView
-        android:text="TextView"
+        android:id="@+id/tv_Score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="1dp"
+        android:layout_marginStart="1dp"
+        android:layout_weight="1"
+        android:padding="5dp"
+        android:text="TextView"
         android:visibility="invisible"
-        android:id="@+id/tv_Score" />
+        android:textSize="25sp"/>
+
+    <TextView
+        android:id="@+id/tv_Life"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="1dp"
+        android:layout_marginStart="1dp"
+        android:layout_weight="1"
+        android:padding="5dp"
+        android:visibility="invisible"
+        android:textSize="25sp"/>
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_Definitions"
+        android:maxLines="10"
+        android:layout_below="@+id/tv_Score"
+        android:layout_alignLeft="@+id/tv_Score"
+        android:layout_alignStart="@+id/tv_Score"
+        android:visibility="invisible"
+        android:textSize="20sp"
+        android:scrollbars="vertical"
+
+        />
+    <TextView
+        android:text="TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_Input"
+        android:layout_below="@+id/tv_Definitions"
+        android:layout_alignLeft="@+id/tv_Definitions"
+        android:layout_alignStart="@+id/tv_Definitions"
+        android:visibility="invisible"
+        android:textSize="20sp"
+        android:padding="25dp"
+        android:textAlignment="center"
+        android:scrollbars="vertical"
+
+        />
+
+    <LinearLayout
+        android:id="@+id/linearlayout"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tv_Input"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"></LinearLayout>
 
 </RelativeLayout>

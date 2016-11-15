@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.util.Xml;
 import android.view.View;
@@ -30,6 +31,7 @@ import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -46,7 +48,7 @@ public class Quiz1 extends AppCompatActivity {
     private int fileNumber = 0;
     private int diff = 1;
     Button button_Start;
-    TextView tv_Score;
+    TextView tv_Score,tv_Life,tv_Definitions,tv_Input;
     String domain = "";
     ArrayList<WordData> words = new ArrayList<WordData>();
     final String domains[] = {"Sport", "Art", "Literature", "Music", "Variety", "Architecture"};
@@ -57,6 +59,10 @@ public class Quiz1 extends AppCompatActivity {
         setContentView(R.layout.activity_quiz1);
         button_Start = (Button) findViewById(R.id.button_Start);
         tv_Score = (TextView) findViewById(R.id.tv_Score);
+        tv_Life = (TextView) findViewById(R.id.tv_Life);
+        tv_Definitions = (TextView) findViewById(R.id.tv_Definitions);
+        tv_Input = (TextView) findViewById(R.id.tv_Input);
+
         setTitle("Quiz 1");
         Random r = new Random();
         int min = 0;
@@ -77,9 +83,58 @@ public class Quiz1 extends AppCompatActivity {
     }
     public void startQuiz(View view) {
         int score = 0;
+        int life = 3;
+        int index = 0;
+       // genWordData(words);
         button_Start.setVisibility(View.INVISIBLE);
         tv_Score.setVisibility(View.VISIBLE);
-        tv_Score.setText("Score:    "+score);
+        tv_Life.setVisibility(View.VISIBLE);
+        tv_Definitions.setVisibility(View.VISIBLE);
+        tv_Input.setVisibility(View.VISIBLE);
+
+        tv_Life.setText("Life: "+life);
+        tv_Score.setText("Score: "+score);
+        tv_Definitions.setMovementMethod(ScrollingMovementMethod.getInstance());
+
+        String answer = words.get(index).getName();
+        char[] charArray = answer.toCharArray();
+        shuffleArray(charArray);
+        Log.i("asdasd   ",String.valueOf(charArray[0])+String.valueOf(charArray[1])+String.valueOf(charArray[2]));
+        genDefinition(index);
+    }
+    private  void shuffleArray(char[] array)
+    {
+        int index;
+        Random random = new Random();
+        for (int i = array.length - 1; i > 0; i--)
+        {
+            index = random.nextInt(i + 1);
+            if (index != i)
+            {
+                array[index] ^= array[i];
+                array[i] ^= array[index];
+                array[index] ^= array[i];
+            }
+        }
+    }
+    private void genWordData(ArrayList<WordData> gen) {
+
+        Collections.shuffle(gen);
+    }
+    private void genDefinition(int index) {
+        String Definitions = "Definitions:\n";
+        for (int i = 0 ; i < words.get(index).getDefinitions().size(); i ++){
+            Log.i("Definitions",words.get(index).getDefinitions().get(i).toString());
+            boolean isRepeated = false;
+            for (int j = words.get(index).getDefinitions().size()-1 ; j > i; j --){
+                if (words.get(index).getDefinitions().get(i).toString().equals(words.get(index).getDefinitions().get(j).toString()))
+                {    isRepeated = true;
+                    break;}
+            }
+            if (!isRepeated){
+                Definitions += "- "+words.get(index).getDefinitions().get(i).toString()+"\n\n";}
+        }
+        tv_Definitions.setText(Definitions);
     }
     private String wordlist() {
         final String language = "en";
