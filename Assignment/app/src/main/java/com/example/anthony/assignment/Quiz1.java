@@ -10,6 +10,7 @@ import android.util.Log;
 import android.util.Xml;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -48,11 +49,13 @@ public class Quiz1 extends AppCompatActivity {
     private int fileNumber = 0;
     private int diff = 1;
     Button button_Start;
-    TextView tv_Score,tv_Life,tv_Definitions,tv_Input;
+    TextView tv_Score, tv_Life, tv_Definitions, tv_Input;
     String domain = "";
     ArrayList<WordData> words = new ArrayList<WordData>();
     final String domains[] = {"Sport", "Art", "Literature", "Music", "Variety", "Architecture"};
-
+    String input = "";
+    String answer ="";
+    int score;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,67 +78,133 @@ public class Quiz1 extends AppCompatActivity {
         } else {
             domParseXML(getStringFromFile(domain + ".xml"));
             button_Start.setVisibility(View.VISIBLE);
-            Log.i("1", words.get(0).getName());
-            Log.i("1", words.get(0).getDefinitions().get(0).toString());
-            Log.i("1", words.get(0).getDefinitions().get(1).toString());
+            setTitle(domain);
         }
 
     }
+
     public void startQuiz(View view) {
-        int score = 0;
+         score = 0;
         int life = 3;
         int index = 0;
-       // genWordData(words);
+         genWordData(words);
         button_Start.setVisibility(View.INVISIBLE);
         tv_Score.setVisibility(View.VISIBLE);
         tv_Life.setVisibility(View.VISIBLE);
         tv_Definitions.setVisibility(View.VISIBLE);
         tv_Input.setVisibility(View.VISIBLE);
 
-        tv_Life.setText("Life: "+life);
-        tv_Score.setText("Score: "+score);
+        tv_Life.setText("Life: " + life);
+        tv_Score.setText("Score: " + score);
+        tv_Input.setText(input);
         tv_Definitions.setMovementMethod(ScrollingMovementMethod.getInstance());
 
-        String answer = words.get(index).getName();
+         answer = words.get(index).getName();
         char[] charArray = answer.toCharArray();
         shuffleArray(charArray);
-        Log.i("asdasd   ",String.valueOf(charArray[0])+String.valueOf(charArray[1])+String.valueOf(charArray[2]));
         genDefinition(index);
+        genButton(charArray);
     }
-    private  void shuffleArray(char[] array)
-    {
+
+    private void genButton(char[] array) {
+        final LinearLayout lm = (LinearLayout) findViewById(R.id.linearMain);
+        final LinearLayout lm2 = (LinearLayout) findViewById(R.id.linearMain2);
+        final LinearLayout lm3 = (LinearLayout) findViewById(R.id.linearMain3);
+        final LinearLayout lm4 = (LinearLayout) findViewById(R.id.linearMain4);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+
+        for (int i = 0; i < array.length; i++) {
+            // Create LinearLayout
+            LinearLayout ll = new LinearLayout(this);
+            ll.setOrientation(LinearLayout.HORIZONTAL);
+            Log.i(" a", String.valueOf(array[i]));
+            final Button btn = new Button(this);
+            btn.setId(i);
+
+            btn.setLayoutParams(params);
+            btn.setText(String.valueOf(array[i]));
+            btn.setTextSize(20);
+            final int index = i;
+            // Set click listener for button
+            btn.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+
+                    Log.i("TAG", "index :" + index);
+                    input += btn.getText();
+                    btn.setVisibility(View.INVISIBLE);
+                    tv_Input.setText(input);
+                }
+            });
+
+            ll.addView(btn);
+
+            if (i < 3) {
+                lm.addView(ll);
+            } else if (i < 6) {
+                lm2.addView(ll);
+            } else if (i < 9) {
+                lm3.addView(ll);
+            } else if (i < 12) {
+                lm4.addView(ll);
+            }
+        }
+    }
+
+    private void shuffleArray(char[] array) {
         int index;
         Random random = new Random();
-        for (int i = array.length - 1; i > 0; i--)
-        {
+        for (int i = array.length - 1; i > 0; i--) {
             index = random.nextInt(i + 1);
-            if (index != i)
-            {
+            if (index != i) {
                 array[index] ^= array[i];
                 array[i] ^= array[index];
                 array[index] ^= array[i];
             }
         }
     }
+
+    public void check(View view) {
+        if (input.equals(answer)){
+            score++;
+            tv_Score.setText("Score: " + score);
+            input = "";
+            tv_Input.setText(input);
+        }
+        else {
+            input = "";
+            tv_Input.setText(input);
+            char[] temp = answer.toCharArray();
+            for (int i = 0; i < temp.length; i++) {
+                Button  btn = (Button) findViewById(i);
+                btn.setVisibility(View.VISIBLE);
+            }
+        }
+    }
+
     private void genWordData(ArrayList<WordData> gen) {
 
         Collections.shuffle(gen);
     }
+
     private void genDefinition(int index) {
         String Definitions = "Definitions:\n";
-        for (int i = 0 ; i < words.get(index).getDefinitions().size(); i ++){
-            Log.i("Definitions",words.get(index).getDefinitions().get(i).toString());
+        for (int i = 0; i < words.get(index).getDefinitions().size(); i++) {
+            Log.i("Definitions", words.get(index).getDefinitions().get(i).toString());
             boolean isRepeated = false;
-            for (int j = words.get(index).getDefinitions().size()-1 ; j > i; j --){
-                if (words.get(index).getDefinitions().get(i).toString().equals(words.get(index).getDefinitions().get(j).toString()))
-                {    isRepeated = true;
-                    break;}
+            for (int j = words.get(index).getDefinitions().size() - 1; j > i; j--) {
+                if (words.get(index).getDefinitions().get(i).toString().equals(words.get(index).getDefinitions().get(j).toString())) {
+                    isRepeated = true;
+                    break;
+                }
             }
-            if (!isRepeated){
-                Definitions += "- "+words.get(index).getDefinitions().get(i).toString()+"\n\n";}
+            if (!isRepeated) {
+                Definitions += "- " + words.get(index).getDefinitions().get(i).toString() + "\n\n";
+            }
         }
         tv_Definitions.setText(Definitions);
     }
+
     private String wordlist() {
         final String language = "en";
         final String filters = "lexicalCategory=noun,adjective;domains=" + domain;
@@ -180,7 +249,7 @@ public class Quiz1 extends AppCompatActivity {
             words.add(new WordData(id, name));
 
             for (int a = 0; a < numberOfDefinitions; a++) {
-                words.get(i).getDefinitions().add(word.getElementsByTagName("definition"+a).item(0).getFirstChild().getNodeValue());
+                words.get(i).getDefinitions().add(word.getElementsByTagName("definition" + a).item(0).getFirstChild().getNodeValue());
 
             }
         }
@@ -322,10 +391,6 @@ public class Quiz1 extends AppCompatActivity {
             super.onPostExecute(result);
 
             XmlSerializer serializer = Xml.newSerializer();
-            // for (int i = 0; i < words.size(); i++) {
-
-            //  for (int a = 0; a < words.get(i).getDefinitions().size(); a++) {
-            // System.out.println(words.get(i).getName() + ":  " + words.get(i).getDefinitions().get(a));
 
             try {
                 FileOutputStream fout = openFileOutput(domain + ".xml", Context.MODE_PRIVATE);

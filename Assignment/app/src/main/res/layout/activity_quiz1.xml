@@ -18,7 +18,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="180dp"
         android:layout_weight="1"
-        android:background="@color/table_cell"
+        android:background="@android:color/holo_orange_dark"
         android:text="Start"
         android:textSize="25sp"
         android:textStyle="normal|bold"
@@ -33,13 +33,10 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="1dp"
-        android:layout_marginStart="1dp"
-        android:layout_weight="1"
-        android:padding="5dp"
+        android:padding="2dp"
         android:text="TextView"
         android:visibility="invisible"
-        android:textSize="25sp"/>
+        android:textSize="22sp" android:textColor="@android:color/holo_orange_dark"/>
 
     <TextView
         android:id="@+id/tv_Life"
@@ -48,12 +45,10 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="1dp"
-        android:layout_marginStart="1dp"
         android:layout_weight="1"
-        android:padding="5dp"
+        android:padding="2dp"
         android:visibility="invisible"
-        android:textSize="25sp"/>
+        android:textSize="22sp" android:textColor="@android:color/holo_orange_dark"/>
 
     <TextView
         android:text="TextView"
@@ -71,27 +66,53 @@
         />
     <TextView
         android:text="TextView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tv_Input"
         android:layout_below="@+id/tv_Definitions"
         android:layout_alignLeft="@+id/tv_Definitions"
         android:layout_alignStart="@+id/tv_Definitions"
         android:visibility="invisible"
-        android:textSize="20sp"
-        android:padding="25dp"
+        android:textSize="25sp"
+        android:paddingTop="10dp"
+        android:paddingBottom="5dp"
         android:textAlignment="center"
         android:scrollbars="vertical"
-
+        android:textColor="@android:color/holo_orange_dark"
+        android:onClick="check"
         />
 
+
     <LinearLayout
-        android:id="@+id/linearlayout"
+        android:id="@+id/linearMain"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/tv_Input"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"></LinearLayout>
-
+    <LinearLayout
+        android:id="@+id/linearMain2"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearMain"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"></LinearLayout>
+    <LinearLayout
+        android:id="@+id/linearMain3"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearMain2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"></LinearLayout>
+    <LinearLayout
+        android:id="@+id/linearMain4"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearMain3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"></LinearLayout>
 </RelativeLayout>
