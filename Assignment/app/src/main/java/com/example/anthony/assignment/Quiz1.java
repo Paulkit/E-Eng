@@ -207,6 +207,7 @@ public class Quiz1 extends AppCompatActivity {
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
         }
+  
         Document doc = null;
         try {
             doc = db.parse(new InputSource(new StringReader(XMLString)));
