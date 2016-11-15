@@ -10,7 +10,7 @@ import android.util.Log;
 import android.util.Xml;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -48,14 +48,14 @@ public class Quiz1 extends AppCompatActivity {
     private ProgressDialog barProgressDialog;
     private int fileNumber = 0;
     private int diff = 1;
-    Button button_Start;
-    TextView tv_Score, tv_Life, tv_Definitions, tv_Input;
+    Button button_Start,button_Submit;
+    TextView tv_Score, tv_Life, tv_Definitions, tv_Hints;
+    EditText et_Input;
     String domain = "";
     ArrayList<WordData> words = new ArrayList<WordData>();
     final String domains[] = {"Sport", "Art", "Literature", "Music", "Variety", "Architecture"};
-    String input = "";
     String answer ="";
-    int score;
+    int score,life,index;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,8 +64,9 @@ public class Quiz1 extends AppCompatActivity {
         tv_Score = (TextView) findViewById(R.id.tv_Score);
         tv_Life = (TextView) findViewById(R.id.tv_Life);
         tv_Definitions = (TextView) findViewById(R.id.tv_Definitions);
-        tv_Input = (TextView) findViewById(R.id.tv_Input);
-
+        tv_Hints = (TextView) findViewById(R.id.tv_Hints);
+        et_Input = (EditText) findViewById(R.id.et_Input);
+        button_Submit = (Button) findViewById(R.id.button_Submit);
         setTitle("Quiz 1");
         Random r = new Random();
         int min = 0;
@@ -85,71 +86,29 @@ public class Quiz1 extends AppCompatActivity {
 
     public void startQuiz(View view) {
          score = 0;
-        int life = 3;
-        int index = 0;
+         life = 3;
+         index = 0;
          genWordData(words);
         button_Start.setVisibility(View.INVISIBLE);
         tv_Score.setVisibility(View.VISIBLE);
         tv_Life.setVisibility(View.VISIBLE);
         tv_Definitions.setVisibility(View.VISIBLE);
-        tv_Input.setVisibility(View.VISIBLE);
+        tv_Hints.setVisibility(View.VISIBLE);
+        et_Input.setVisibility(View.VISIBLE);
+        button_Submit.setVisibility(View.VISIBLE);
 
         tv_Life.setText("Life: " + life);
         tv_Score.setText("Score: " + score);
-        tv_Input.setText(input);
         tv_Definitions.setMovementMethod(ScrollingMovementMethod.getInstance());
 
-         answer = words.get(index).getName();
+        answer = words.get(index).getName();
+        Log.i("ANSWER",answer);
         char[] charArray = answer.toCharArray();
         shuffleArray(charArray);
         genDefinition(index);
-        genButton(charArray);
+        genHints(charArray);
     }
 
-    private void genButton(char[] array) {
-        final LinearLayout lm = (LinearLayout) findViewById(R.id.linearMain);
-        final LinearLayout lm2 = (LinearLayout) findViewById(R.id.linearMain2);
-        final LinearLayout lm3 = (LinearLayout) findViewById(R.id.linearMain3);
-        final LinearLayout lm4 = (LinearLayout) findViewById(R.id.linearMain4);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-
-        for (int i = 0; i < array.length; i++) {
-            // Create LinearLayout
-            LinearLayout ll = new LinearLayout(this);
-            ll.setOrientation(LinearLayout.HORIZONTAL);
-            Log.i(" a", String.valueOf(array[i]));
-            final Button btn = new Button(this);
-            btn.setId(i);
-
-            btn.setLayoutParams(params);
-            btn.setText(String.valueOf(array[i]));
-            btn.setTextSize(20);
-            final int index = i;
-            // Set click listener for button
-            btn.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-
-                    Log.i("TAG", "index :" + index);
-                    input += btn.getText();
-                    btn.setVisibility(View.INVISIBLE);
-                    tv_Input.setText(input);
-                }
-            });
-
-            ll.addView(btn);
-
-            if (i < 3) {
-                lm.addView(ll);
-            } else if (i < 6) {
-                lm2.addView(ll);
-            } else if (i < 9) {
-                lm3.addView(ll);
-            } else if (i < 12) {
-                lm4.addView(ll);
-            }
-        }
-    }
 
     private void shuffleArray(char[] array) {
         int index;
@@ -163,23 +122,41 @@ public class Quiz1 extends AppCompatActivity {
             }
         }
     }
-
-    public void check(View view) {
-        if (input.equals(answer)){
-            score++;
-            tv_Score.setText("Score: " + score);
-            input = "";
-            tv_Input.setText(input);
-        }
-        else {
-            input = "";
-            tv_Input.setText(input);
-            char[] temp = answer.toCharArray();
-            for (int i = 0; i < temp.length; i++) {
-                Button  btn = (Button) findViewById(i);
-                btn.setVisibility(View.VISIBLE);
+    private void genHints(char[] array) {
+        String hint = "";
+        for (int i = 0; i < array.length; i++) {
+            boolean isRepeated = false;
+            for (int j =array.length - 1; j > i; j--) {
+                if (array[i]==(array[j])) {
+                    isRepeated = true;
+                    break;
+                }
+            }
+            if (!isRepeated) {
+                hint += array[i];
             }
         }
+        tv_Hints.setText(hint);
+    }
+    public void check(View view) {
+        if (et_Input.getText().toString().toLowerCase().equals(answer)){
+            et_Input.setText("");
+            score++;
+            tv_Score.setText("Score: " + score);
+            index++;
+            answer = words.get(index).getName();
+            Log.i("ANSWER",answer);
+            char[] charArray = answer.toCharArray();
+            shuffleArray(charArray);
+            genDefinition(index);
+            genHints(charArray);
+        }
+        else {
+            et_Input.setText("");
+            life--;
+            tv_Life.setText("Life: " + life);
+            }
+
     }
 
     private void genWordData(ArrayList<WordData> gen) {
@@ -190,7 +167,6 @@ public class Quiz1 extends AppCompatActivity {
     private void genDefinition(int index) {
         String Definitions = "Definitions:\n";
         for (int i = 0; i < words.get(index).getDefinitions().size(); i++) {
-            Log.i("Definitions", words.get(index).getDefinitions().get(i).toString());
             boolean isRepeated = false;
             for (int j = words.get(index).getDefinitions().size() - 1; j > i; j--) {
                 if (words.get(index).getDefinitions().get(i).toString().equals(words.get(index).getDefinitions().get(j).toString())) {
