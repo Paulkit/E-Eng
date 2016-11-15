@@ -2,6 +2,7 @@ package com.example.anthony.assignment;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -53,7 +54,7 @@ public class Quiz1 extends AppCompatActivity {
     EditText et_Input;
     String domain = "";
     ArrayList<WordData> words = new ArrayList<WordData>();
-    final String domains[] = {"Sport", "Art", "Literature", "Music", "Variety", "Architecture"};
+    final String domains[] = {"Sport", "Art", "Literature", "Architecture"};
     String answer ="";
     int score,life,index;
     @Override
@@ -70,9 +71,8 @@ public class Quiz1 extends AppCompatActivity {
         setTitle("Quiz 1");
         Random r = new Random();
         int min = 0;
-        int max = domains.length;
-        //domain = domains[r.nextInt(max - min + 1) + min];
-        domain = domains[0];
+        int max = domains.length-1;
+        domain = domains[r.nextInt(max - min + 1) + min];
 
         if (readDataFromFile(domain + ".xml") == false) {
             new CallbackTask().execute(wordlist());
@@ -103,7 +103,15 @@ public class Quiz1 extends AppCompatActivity {
 
         answer = words.get(index).getName();
         Log.i("ANSWER",answer);
-        char[] charArray = answer.toCharArray();
+        String temp = answer;
+
+        for (int i =0;i<3;i++) {
+            Random r = new Random();
+            char c = (char)(r.nextInt(26) + 'a');
+            temp += c;
+        }
+
+        char[] charArray = temp.toCharArray();
         shuffleArray(charArray);
         genDefinition(index);
         genHints(charArray);
@@ -123,6 +131,7 @@ public class Quiz1 extends AppCompatActivity {
         }
     }
     private void genHints(char[] array) {
+
         String hint = "";
         for (int i = 0; i < array.length; i++) {
             boolean isRepeated = false;
@@ -133,12 +142,17 @@ public class Quiz1 extends AppCompatActivity {
                 }
             }
             if (!isRepeated) {
+
                 hint += array[i];
             }
         }
+
         tv_Hints.setText(hint);
     }
     public void check(View view) {
+       Log.i ("index",String.valueOf(index));
+        Log.i ("leh",String.valueOf(words.size()));
+        if (index<words.size()){
         if (et_Input.getText().toString().toLowerCase().equals(answer)){
             et_Input.setText("");
             score++;
@@ -146,7 +160,14 @@ public class Quiz1 extends AppCompatActivity {
             index++;
             answer = words.get(index).getName();
             Log.i("ANSWER",answer);
-            char[] charArray = answer.toCharArray();
+            String temp = answer;
+
+            for (int i =0;i<3;i++) {
+                Random r = new Random();
+                char c = (char)(r.nextInt(26) + 'a');
+                temp += c;
+            }
+            char[] charArray = temp.toCharArray();
             shuffleArray(charArray);
             genDefinition(index);
             genHints(charArray);
@@ -155,7 +176,35 @@ public class Quiz1 extends AppCompatActivity {
             et_Input.setText("");
             life--;
             tv_Life.setText("Life: " + life);
+            index++;
+            answer = words.get(index).getName();
+            Log.i("ANSWER",answer);
+            String temp = answer;
+
+            for (int i =0;i<3;i++) {
+                Random r = new Random();
+                char c = (char)(r.nextInt(26) + 'a');
+                temp += c;
             }
+            char[] charArray = temp.toCharArray();
+            shuffleArray(charArray);
+            genDefinition(index);
+            genHints(charArray);
+            if (life==0){
+                Intent i = new Intent(this, Quiz1Result.class);
+                i.putExtra("Score", score);
+                this.finish();
+                startActivity(i);
+            }
+            }
+
+    }else {
+
+            Intent i = new Intent(this, Quiz1Result.class);
+            i.putExtra("Score", score);
+            this.finish();
+            startActivity(i);
+        }
 
     }
 
@@ -183,7 +232,7 @@ public class Quiz1 extends AppCompatActivity {
 
     private String wordlist() {
         final String language = "en";
-        final String filters = "lexicalCategory=noun,adjective;domains=" + domain;
+        final String filters = "lexicalCategory=noun;domains=" + domain;
         return "https://od-api.oxforddictionaries.com:443/api/v1/wordlist/" + language + "/" + filters;
     }
 
@@ -281,7 +330,6 @@ public class Quiz1 extends AppCompatActivity {
                 urlConnection.setRequestProperty("app_id", app_id);
                 urlConnection.setRequestProperty("app_key", app_key);
 
-                // read the output from the server
                 BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
                 StringBuilder stringBuilder = new StringBuilder();
 
@@ -392,9 +440,9 @@ public class Quiz1 extends AppCompatActivity {
                 }
                 serializer.endTag(null, "words");
                 serializer.endDocument();
-                //write xml data into the FileOutputStream
+
                 serializer.flush();
-                //finally we close the file stream
+
                 fout.close();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
