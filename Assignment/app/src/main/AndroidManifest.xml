@@ -26,9 +26,11 @@
         </activity>
         <activity android:name=".syllabary" />
         <activity android:name=".QuizSelections" />
-        <activity  android:windowSoftInputMode="adjustPan" android:name=".Quiz1" />
-        <activity android:name=".Quiz1Result"></activity>
-
+        <activity
+            android:name=".Quiz1"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".Quiz1Result" />
+        <activity android:name=".Quiz2"></activity>
     </application>
 
 </manifest>
