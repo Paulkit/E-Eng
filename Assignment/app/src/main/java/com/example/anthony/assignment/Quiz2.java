@@ -2,6 +2,7 @@ package com.example.anthony.assignment;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,20 +17,23 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class Quiz2 extends AppCompatActivity {
     private String path;
     private MediaPlayer mediaPlayer;
-    Button button_Start,button_Submit;
-    TextView tv_Score, tv_Life,textView2;
+    Button button_Start, button_Submit;
+    TextView tv_Score, tv_Life, textView2;
     EditText et_Input;
     int score, life;
     String answer = "";
     ArrayList<String> words = new ArrayList<String>();
     Button button_Play;
-
+    ArrayList<String> wrong = new ArrayList<String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +66,7 @@ public class Quiz2 extends AppCompatActivity {
         Log.i("Total of words", String.valueOf(words.size()));
         GenNewAnswer();
     }
+
     public void check(View view) {
 
         if (et_Input.getText().toString().toLowerCase().equals(answer)) {
@@ -69,14 +74,16 @@ public class Quiz2 extends AppCompatActivity {
             score++;
             tv_Score.setText("Score: " + score);
             GenNewAnswer();
-        }else {
+        } else {
             et_Input.setText("");
             life--;
+            wrong.add(answer);
             tv_Life.setText("Life: " + life);
             GenNewAnswer();
-            if (life==0){
+            if (life == 0) {
                 Intent i = new Intent(this, Quiz1Result.class);
                 i.putExtra("Score", score);
+                i.putExtra("wrong", wrong);
                 this.finish();
                 startActivity(i);
             }
@@ -86,11 +93,37 @@ public class Quiz2 extends AppCompatActivity {
 
     }
 
+    private class CallbackTask extends AsyncTask<String, Integer, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            try {
+                URL url = new URL(params[0]);
+                HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
+                int statusCode = urlConnection.getResponseCode();
+                Log.i("statusCode",String.valueOf(statusCode));
+                if (statusCode == 200) return "1";
+                else return "0";
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return "0";
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            if (result.equals("0")) GenNewAnswer();
+        }
+    }
+
     public void GenNewAnswer() {
         Random r = new Random();
-        int index = r.nextInt(69902);
+        int index = r.nextInt(words.size() - 1);
         answer = words.get(index).toString();
         Log.i("answer", answer);
+        new CallbackTask().execute("https://ssl.gstatic.com/dictionary/static/sounds/de/0/" + answer + ".mp3");
         button_Play.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 try {

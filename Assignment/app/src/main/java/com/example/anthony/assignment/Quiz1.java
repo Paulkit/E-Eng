@@ -54,6 +54,7 @@ public class Quiz1 extends AppCompatActivity {
     EditText et_Input;
     String domain = "";
     ArrayList<WordData> words = new ArrayList<WordData>();
+    ArrayList<String> wrong = new ArrayList<String>();
     final String domains[] = {"Sport", "Art", "Literature", "Architecture"};
     String answer ="";
     int score,life,index;
@@ -178,6 +179,7 @@ public class Quiz1 extends AppCompatActivity {
         else {
             et_Input.setText("");
             life--;
+            wrong.add(answer);
             tv_Life.setText("Life: " + life);
             index++;
             answer = words.get(index).getName();
@@ -196,6 +198,7 @@ public class Quiz1 extends AppCompatActivity {
             if (life==0){
                 Intent i = new Intent(this, Quiz1Result.class);
                 i.putExtra("Score", score);
+                i.putExtra("wrong", wrong);
                 this.finish();
                 startActivity(i);
             }
@@ -205,6 +208,7 @@ public class Quiz1 extends AppCompatActivity {
 
             Intent i = new Intent(this, Quiz1Result.class);
             i.putExtra("Score", score);
+            i.putExtra("wrong", wrong);
             this.finish();
             startActivity(i);
         }
