@@ -77,9 +77,6 @@ private static int REQUEST_LEADERBOARD = 100; //  indeed an arbitrary int that y
      //   mGoogleApiClient.connect();
     }
 
-    public void quit(View view) {
-        System.exit(0);
-    }
 
     @Override
     public void onConnected(Bundle bundle) {

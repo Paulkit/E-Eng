@@ -60,15 +60,15 @@
         android:textStyle="normal|bold" />
 
     <Button
-        android:id="@+id/btn_quit"
+        android:id="@+id/btn_record"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/btn_highscore"
-        android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/btn_highscore"
-        android:layout_marginBottom="32dp"
-        android:onClick="quit"
-        android:text="@string/btn_quit"
+        android:layout_below="@+id/btn_highscore"
+        android:layout_marginTop="20dp"
+        android:onClick="showHighScore"
+        android:text="@string/btn_record"
         android:textSize="18sp" />
 
     <com.wang.avi.AVLoadingIndicatorView

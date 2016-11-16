@@ -50,7 +50,7 @@ public class Quiz1 extends AppCompatActivity {
     private int fileNumber = 0;
     private int diff = 1;
     Button button_Start,button_Submit;
-    TextView tv_Score, tv_Life, tv_Definitions, tv_Hints;
+    TextView tv_Score, tv_Life, tv_Definitions, tv_Hints,textView2;
     EditText et_Input;
     String domain = "";
     ArrayList<WordData> words = new ArrayList<WordData>();
@@ -68,7 +68,9 @@ public class Quiz1 extends AppCompatActivity {
         tv_Hints = (TextView) findViewById(R.id.tv_Hints);
         et_Input = (EditText) findViewById(R.id.et_Input);
         button_Submit = (Button) findViewById(R.id.button_Submit);
-        setTitle("Quiz 1");
+        textView2 = (TextView) findViewById(R.id.textView2);
+
+        setTitle("Word Quiz");
         Random r = new Random();
         int min = 0;
         int max = domains.length-1;
@@ -79,7 +81,7 @@ public class Quiz1 extends AppCompatActivity {
         } else {
             domParseXML(getStringFromFile(domain + ".xml"));
             button_Start.setVisibility(View.VISIBLE);
-            setTitle(domain);
+            setTitle("Word Quiz - "+domain);
         }
 
     }
@@ -96,6 +98,7 @@ public class Quiz1 extends AppCompatActivity {
         tv_Hints.setVisibility(View.VISIBLE);
         et_Input.setVisibility(View.VISIBLE);
         button_Submit.setVisibility(View.VISIBLE);
+        textView2.setVisibility(View.INVISIBLE);
 
         tv_Life.setText("Life: " + life);
         tv_Score.setText("Score: " + score);
