@@ -30,7 +30,8 @@
             android:name=".Quiz1"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".Quiz1Result" />
-        <activity android:name=".Quiz2"></activity>
+        <activity android:name=".Quiz2" />
+        <activity android:name=".Records"></activity>
     </application>
 
 </manifest>

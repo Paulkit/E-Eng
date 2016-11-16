@@ -62,6 +62,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
+        android:visibility="invisible"
         android:text="We've provided the pronunciation of words.\n\nPlease enter the words."
         android:textSize="20dp"
        />

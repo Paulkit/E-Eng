@@ -75,13 +75,15 @@ public class Quiz1 extends AppCompatActivity {
         Random r = new Random();
         int min = 0;
         int max = domains.length-1;
-        domain = domains[r.nextInt(max - min + 1) + min];
-
+    //    domain = domains[r.nextInt(max - min + 1) + min];
+        domain = domains[0];
         if (readDataFromFile(domain + ".xml") == false) {
+            setTitle("Word Quiz - "+domain);
             new CallbackTask().execute(wordlist());
         } else {
             domParseXML(getStringFromFile(domain + ".xml"));
             button_Start.setVisibility(View.VISIBLE);
+            textView2.setVisibility(View.VISIBLE);
             setTitle("Word Quiz - "+domain);
         }
 
@@ -154,8 +156,7 @@ public class Quiz1 extends AppCompatActivity {
         tv_Hints.setText(hint);
     }
     public void check(View view) {
-       Log.i ("index",String.valueOf(index));
-        Log.i ("leh",String.valueOf(words.size()));
+
         if (index<words.size()){
         if (et_Input.getText().toString().toLowerCase().equals(answer)){
             et_Input.setText("");
@@ -239,7 +240,7 @@ public class Quiz1 extends AppCompatActivity {
 
     private String wordlist() {
         final String language = "en";
-        final String filters = "lexicalCategory=noun;domains=" + domain;
+        final String filters = "lexicalCategory=noun,adjective;domains=" + domain;
         return "https://od-api.oxforddictionaries.com:443/api/v1/wordlist/" + language + "/" + filters;
     }
 
@@ -328,8 +329,8 @@ public class Quiz1 extends AppCompatActivity {
         protected String doInBackground(String... params) {
             int progress = 0;
             //TODO: replace with your own app id and app key
-            final String app_id = "25e078c4";
-            final String app_key = "99015df7c1045e3f566fd76780eb3cf9";
+            final String app_id = "6d1da903";
+            final String app_key = "610188df55f40e7dc8135da75a622b58";
             try {
                 URL url = new URL(params[0]);
                 HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
@@ -460,9 +461,8 @@ public class Quiz1 extends AppCompatActivity {
             barProgressDialog.dismiss();
             setTitle(domain);
             button_Start.setVisibility(View.VISIBLE);
-            Log.i("0", words.get(0).getName());
-            Log.i("0", words.get(0).getDefinitions().get(0).toString());
-            Log.i("0", words.get(0).getDefinitions().get(1).toString());
+            textView2.setVisibility(View.VISIBLE);
+
         }
     }
 }

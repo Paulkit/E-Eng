@@ -76,7 +76,10 @@ private static int REQUEST_LEADERBOARD = 100; //  indeed an arbitrary int that y
      //   mSignInClicked = true;
      //   mGoogleApiClient.connect();
     }
-
+    public void showRecords(View view) {
+        Intent i = new Intent(this, Records.class);
+        startActivity(i);
+    }
 
     @Override
     public void onConnected(Bundle bundle) {

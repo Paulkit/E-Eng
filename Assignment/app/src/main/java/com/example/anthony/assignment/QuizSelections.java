@@ -11,6 +11,7 @@ public class QuizSelections extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_selections);
+        setTitle("Quiz Selection");
     }
     public void showQuiz1(View view) {
         Intent i = new Intent(this, Quiz1.class);

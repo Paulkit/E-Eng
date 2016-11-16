@@ -67,7 +67,7 @@
         android:layout_alignStart="@+id/btn_highscore"
         android:layout_below="@+id/btn_highscore"
         android:layout_marginTop="20dp"
-        android:onClick="showHighScore"
+        android:onClick="showRecords"
         android:text="@string/btn_record"
         android:textSize="18sp" />
 
