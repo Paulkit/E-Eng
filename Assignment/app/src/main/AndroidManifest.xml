@@ -17,13 +17,16 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".MainActivity"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity android:name=".SplashActivity" ><intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+
+        <category android:name="android.intent.category.LAUNCHER" />
+    </intent-filter>
         </activity>
+
+
         <activity android:name=".syllabary" />
         <activity android:name=".QuizSelections" />
         <activity
@@ -32,6 +35,7 @@
         <activity android:name=".Quiz1Result" />
         <activity android:name=".Quiz2" />
         <activity android:name=".Records" />
+
         <activity android:name=".RecordSearch"></activity>
     </application>
 
