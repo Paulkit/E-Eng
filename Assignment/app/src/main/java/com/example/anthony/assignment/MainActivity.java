@@ -112,12 +112,18 @@ public class MainActivity extends AppCompatActivity implements
         Intent i = new Intent(this, QuizSelections.class);
         startActivity(i);
     }
-
+    public void Show(View view) {
+        Intent i = new Intent(this, QuizSelections.class);
+        startActivity(i);
+    }
     public void showHighScore(View view) {
         //   mSignInClicked = true;
         //   mGoogleApiClient.connect();
     }
-
+    public void showTutorials(View view) {
+        Intent i = new Intent(this, TutorialsSelections.class);
+        startActivity(i);
+    }
     public void showRecords(View view) {
         Intent i = new Intent(this, Records.class);
         startActivity(i);
