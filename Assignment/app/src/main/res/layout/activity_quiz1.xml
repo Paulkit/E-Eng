@@ -59,7 +59,7 @@
         android:layout_alignLeft="@+id/tv_Score"
         android:layout_alignStart="@+id/tv_Score"
         android:layout_below="@+id/tv_Score"
-        android:maxLines="15"
+        android:maxLines="12"
         android:scrollbars="vertical"
         android:text="TextView"
         android:textSize="20sp"

@@ -36,17 +36,18 @@ public class Quiz1Result extends AppCompatActivity {
         setTitle("Result");
         int score = getIntent().getIntExtra("Score", 0);
         wrong = getIntent().getStringArrayListExtra("wrong");
-       // domParseXML(getStringFromFile("records.xml"));
+        if (readDataFromFile("records.xml") == true) {
+            domParseXML(getStringFromFile("records.xml"));
+        }
         for (int i = 0; i < wrong.size(); i++) {
 
             Log.i("Wrong", wrong.get(i).toString());
-
+            output.add(i, wrong.get(i).toString());
         }
         tv_Score = (TextView) findViewById(R.id.tv_Score);
         tv_Score.setText("Score: " + String.valueOf(score));
-        writeToXML();
+        writeToXML(output);
         domParseXML(getStringFromFile("records.xml"));
-        Log.i("Read",getStringFromFile("records.xml"));
         for (int i = 0; i < output.size(); i++) {
 
             Log.i("output", output.get(i).toString());
@@ -72,9 +73,15 @@ public class Quiz1Result extends AppCompatActivity {
             e.printStackTrace();
         }
         Element root = doc.getDocumentElement();
-        NodeList recordsNodeList = root.getElementsByTagName("records");
+        NodeList recordsNodeList = root.getElementsByTagName("word");
+        String ans =recordsNodeList.item(0).getFirstChild().getNodeValue();
 
-     
+        for (int i = 0; i < recordsNodeList.getLength(); i++)
+        {
+            String word =recordsNodeList.item(i).getFirstChild().getNodeValue();
+            output.add(i,word);
+        }
+
     }
 
     private String getStringFromFile(String filename) {
@@ -95,7 +102,7 @@ public class Quiz1Result extends AppCompatActivity {
         }
         return result;
     }
-    private void writeToXML() {
+    private void writeToXML(ArrayList<String> data) {
         XmlSerializer serializer = Xml.newSerializer();
 
         try {
@@ -104,10 +111,10 @@ public class Quiz1Result extends AppCompatActivity {
             serializer.startDocument(null, Boolean.valueOf(true));
             serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
             serializer.startTag(null, "records");
-            for (int i = 0; i < wrong.size(); i++) {
+            for (int i = 0; i < data.size(); i++) {
                 serializer.startTag(null, "word");
-                Log.i("write", wrong.get(i).toString());
-                serializer.text(wrong.get(i).toString());
+                Log.i("write", data.get(i).toString());
+                serializer.text(data.get(i).toString());
                 serializer.endTag(null, "word");
             }
             serializer.endTag(null, "records");
@@ -121,5 +128,19 @@ public class Quiz1Result extends AppCompatActivity {
             e.printStackTrace();
         }
 
+    }
+    private boolean readDataFromFile(String filename) {
+        try {
+            StringBuilder sb = new StringBuilder();
+            FileInputStream fin = openFileInput(filename);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 }

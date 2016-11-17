@@ -75,25 +75,23 @@ public class Quiz1 extends AppCompatActivity {
         Random r = new Random();
         int min = 0;
         int max = domains.length-1;
-    //    domain = domains[r.nextInt(max - min + 1) + min];
-        domain = domains[0];
+        domain = domains[r.nextInt(max - min + 1) + min];
+
         if (readDataFromFile(domain + ".xml") == false) {
-            setTitle("Word Quiz - "+domain);
             new CallbackTask().execute(wordlist());
         } else {
             domParseXML(getStringFromFile(domain + ".xml"));
             button_Start.setVisibility(View.VISIBLE);
-            textView2.setVisibility(View.VISIBLE);
             setTitle("Word Quiz - "+domain);
         }
 
     }
 
     public void startQuiz(View view) {
-         score = 0;
-         life = 3;
-         index = 0;
-         genWordData(words);
+        score = 0;
+        life = 3;
+        index = 0;
+        genWordData(words);
         button_Start.setVisibility(View.INVISIBLE);
         tv_Score.setVisibility(View.VISIBLE);
         tv_Life.setVisibility(View.VISIBLE);
@@ -156,56 +154,57 @@ public class Quiz1 extends AppCompatActivity {
         tv_Hints.setText(hint);
     }
     public void check(View view) {
-
+        Log.i ("index",String.valueOf(index));
+        Log.i ("leh",String.valueOf(words.size()));
         if (index<words.size()){
-        if (et_Input.getText().toString().toLowerCase().equals(answer)){
-            et_Input.setText("");
-            score++;
-            tv_Score.setText("Score: " + score);
-            index++;
-            answer = words.get(index).getName();
-            Log.i("ANSWER",answer);
-            String temp = answer;
+            if (et_Input.getText().toString().toLowerCase().equals(answer)){
+                et_Input.setText("");
+                score++;
+                tv_Score.setText("Score: " + score);
+                index++;
+                answer = words.get(index).getName();
+                Log.i("ANSWER",answer);
+                String temp = answer;
 
-            for (int i =0;i<3;i++) {
-                Random r = new Random();
-                char c = (char)(r.nextInt(26) + 'a');
-                temp += c;
+                for (int i =0;i<3;i++) {
+                    Random r = new Random();
+                    char c = (char)(r.nextInt(26) + 'a');
+                    temp += c;
+                }
+                char[] charArray = temp.toCharArray();
+                shuffleArray(charArray);
+                genDefinition(index);
+                genHints(charArray);
             }
-            char[] charArray = temp.toCharArray();
-            shuffleArray(charArray);
-            genDefinition(index);
-            genHints(charArray);
-        }
-        else {
-            et_Input.setText("");
-            life--;
-            wrong.add(answer);
-            tv_Life.setText("Life: " + life);
-            index++;
-            answer = words.get(index).getName();
-            Log.i("ANSWER",answer);
-            String temp = answer;
+            else {
+                et_Input.setText("");
+                life--;
+                wrong.add(answer);
+                tv_Life.setText("Life: " + life);
+                index++;
+                answer = words.get(index).getName();
+                Log.i("ANSWER",answer);
+                String temp = answer;
 
-            for (int i =0;i<3;i++) {
-                Random r = new Random();
-                char c = (char)(r.nextInt(26) + 'a');
-                temp += c;
-            }
-            char[] charArray = temp.toCharArray();
-            shuffleArray(charArray);
-            genDefinition(index);
-            genHints(charArray);
-            if (life==0){
-                Intent i = new Intent(this, Quiz1Result.class);
-                i.putExtra("Score", score);
-                i.putExtra("wrong", wrong);
-                this.finish();
-                startActivity(i);
-            }
+                for (int i =0;i<3;i++) {
+                    Random r = new Random();
+                    char c = (char)(r.nextInt(26) + 'a');
+                    temp += c;
+                }
+                char[] charArray = temp.toCharArray();
+                shuffleArray(charArray);
+                genDefinition(index);
+                genHints(charArray);
+                if (life==0){
+                    Intent i = new Intent(this, Quiz1Result.class);
+                    i.putExtra("Score", score);
+                    i.putExtra("wrong", wrong);
+                    this.finish();
+                    startActivity(i);
+                }
             }
 
-    }else {
+        }else {
 
             Intent i = new Intent(this, Quiz1Result.class);
             i.putExtra("Score", score);
@@ -459,9 +458,8 @@ public class Quiz1 extends AppCompatActivity {
             }
 
             barProgressDialog.dismiss();
-            setTitle(domain);
+            setTitle("Word Quiz - "+domain);
             button_Start.setVisibility(View.VISIBLE);
-            textView2.setVisibility(View.VISIBLE);
 
         }
     }
