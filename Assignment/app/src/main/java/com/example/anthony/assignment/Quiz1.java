@@ -6,8 +6,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ContextThemeWrapper;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
@@ -16,6 +18,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.games.Games;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -27,7 +33,6 @@ import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlSerializer;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -44,11 +49,13 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-public class Quiz1 extends AppCompatActivity {
+public class Quiz1 extends AppCompatActivity   implements
+        GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener{
 
     private final CharSequence DialogTitle = "Loading";
     private final CharSequence DialogMessage = "Wait to load data...";
-
+    private GoogleApiClient mGoogleApiClient;
     private ProgressDialog barProgressDialog;
     private int fileNumber = 0;
     private int diff = 1;
@@ -82,6 +89,14 @@ public class Quiz1 extends AppCompatActivity {
         int min = 0;
         int max = domains.length-1;
         domain = domains[r.nextInt(max - min + 1) + min];
+
+
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(Games.API).addScope(Games.SCOPE_GAMES)
+                // add other APIs and scopes here as needed
+                .build();
 
         if (readDataFromFile(domain + ".xml") == false) {
             new CallbackTask().execute(wordlist());
@@ -166,6 +181,18 @@ public class Quiz1 extends AppCompatActivity {
             if (et_Input.getText().toString().toLowerCase().equals(answer)){
                 et_Input.setText("");
                 score++;
+
+                if(score==10){
+                    Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_Reach_10_word));
+
+                }else if(score==50){
+                    Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_Reach_50_word));
+
+                }else if(score==100){
+                    Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_Reach_100_word));
+
+                }
+
                 tv_Score.setText("Score: " + score);
                 index++;
                 answer = words.get(index).getName();
@@ -262,7 +289,7 @@ public class Quiz1 extends AppCompatActivity {
                 }
             };
 
-            alertBuilderConfirm("Error occurred", "FileNotFoundException: " + e , "Confirm",Do);
+          //  alertBuilderConfirm("Error occurred", "FileNotFoundException: " + e , "Confirm",Do);
         } catch (IOException e) {
             DialogInterface.OnClickListener Do = new DialogInterface.OnClickListener() {
                 @Override
@@ -271,7 +298,7 @@ public class Quiz1 extends AppCompatActivity {
                 }
             };
 
-            alertBuilderConfirm("Error occurred", "IOException: " + e , "Confirm",Do);
+            alertBuilderConfirm("Error occurred", "IOException: " + e , "Confirm",null);
         }
     }
 
@@ -348,7 +375,7 @@ public class Quiz1 extends AppCompatActivity {
                 }
             };
 
-            alertBuilderConfirm("Error occurred", "FileNotFoundException: " + e , "Confirm",Do);
+        //    alertBuilderConfirm("Error occurred", "FileNotFoundException: " + e , "Confirm",Do);
         } catch (IOException e) {
             DialogInterface.OnClickListener Do = new DialogInterface.OnClickListener() {
                 @Override
@@ -357,7 +384,7 @@ public class Quiz1 extends AppCompatActivity {
                 }
             };
 
-            alertBuilderConfirm("Error occurred", "IOException: " + e , "Confirm",Do);
+            alertBuilderConfirm("Error occurred", "IOException: " + e , "Confirm",null);
         }
         return result;
     }
@@ -375,7 +402,7 @@ public class Quiz1 extends AppCompatActivity {
                 }
             };
 
-            alertBuilderConfirm("Error occurred", "FileNotFoundException: " + e , "Confirm",Do);
+           // alertBuilderConfirm("Error occurred", "FileNotFoundException: " + e , "Confirm",null);
             return false;
         } catch (IOException e) {
             DialogInterface.OnClickListener Do = new DialogInterface.OnClickListener() {
@@ -385,10 +412,25 @@ public class Quiz1 extends AppCompatActivity {
                 }
             };
 
-            alertBuilderConfirm("Error occurred", "IOException: " + e , "Confirm",Do);
+            alertBuilderConfirm("Error occurred", "IOException: " + e , "Confirm",null);
             return false;
         }
         return true;
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
     }
 
     private class CallbackTask extends AsyncTask<String, Integer, String> {
@@ -534,14 +576,8 @@ public class Quiz1 extends AppCompatActivity {
 
                 fout.close();
             } catch (FileNotFoundException e) {
-                DialogInterface.OnClickListener Do = new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        onBackPressed();
-                    }
-                };
 
-                alertBuilderConfirm("Error occurred", "FileNotFoundException: " + e , "Confirm",Do);
+           //     alertBuilderConfirm("Error occurred", "FileNotFoundException: " + e , "Confirm",null);
             } catch (IOException e) {
                 DialogInterface.OnClickListener Do = new DialogInterface.OnClickListener() {
                     @Override
@@ -550,7 +586,7 @@ public class Quiz1 extends AppCompatActivity {
                     }
                 };
 
-                alertBuilderConfirm("Error occurred", "IOException: " + e , "Confirm",Do);
+                alertBuilderConfirm("Error occurred", "IOException: " + e , "Confirm",null);
             }
 
             barProgressDialog.dismiss();

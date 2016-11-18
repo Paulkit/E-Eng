@@ -20,7 +20,7 @@
         android:layout_marginTop="280dp"
         android:layout_weight="1"
         android:background="@android:color/holo_orange_dark"
-        android:onClick="startQuiz (Quiz1)"
+        android:onClick="startQuiz"
         android:text="Start"
         android:textSize="25sp"
         android:textStyle="normal|bold"

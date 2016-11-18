@@ -36,7 +36,7 @@
         <activity android:name=".RecordSearch"/>
         <activity android:name=".TutorialsWordSelections" />
         <activity android:name=".TutorialsWord" />
-        <activity android:name=".TutorialsSelections"></activity>
+        <activity android:name=".TutorialsSelections" />
     </application>
 
 </manifest>

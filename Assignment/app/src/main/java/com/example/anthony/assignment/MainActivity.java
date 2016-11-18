@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.example.anthony.assignment.usefulClass.Config;
@@ -24,21 +23,18 @@ import com.google.example.games.basegameutils.BaseGameUtils;
 public class MainActivity extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener, View.OnClickListener,
-        OnShowcaseEventListener, AdapterView.OnItemClickListener {
+        OnShowcaseEventListener {
     private GoogleApiClient mGoogleApiClient;
     private long mLastClickTime = 0;
     private com.wang.avi.AVLoadingIndicatorView prograss_indecator;
     private static int REQUEST_LEADERBOARD = 100; //  indeed an arbitrary int that you define by yourself.
-
     private static int RC_SIGN_IN = 9001;
-
     private boolean mResolvingConnectionFailure = false;
     private boolean mAutoStartSignInflow = true;
     private boolean mSignInClicked = false;
-
     private ShowcaseView showcaseView;
     private int counter = 0;
-
+    boolean mInSignInFlow = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,21 +43,23 @@ public class MainActivity extends AppCompatActivity implements
         prograss_indecator = (com.wang.avi.AVLoadingIndicatorView) findViewById(R.id.avi);
         // Create the Google Api Client with access to the Play Games services
 
-        /*   mGoogleApiClient = new GoogleApiClient.Builder(this)
+          mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(Games.API).addScope(Games.SCOPE_GAMES)
                 // add other APIs and scopes here as needed
                 .build();
-        */
+
+
+
 
         /** Syllabary description  */
         ViewTarget target = new ViewTarget(R.id.btn_syllabary, this);
         showcaseView = new ShowcaseView.Builder(this)
                 //   .withMaterialShowcase()
                 .setTarget(target)
-                .setContentTitle("Title for btn_syllabary")  /** Syllabary Title */
-                .setContentText("Content for btn_syllabary") /** Syllabary Title */
+                .setContentTitle("Syllabary")  /** Syllabary Title */
+                .setContentText("A list of alphabet with pronunciation") /** Syllabary Title */
                 .setStyle(R.style.CustomShowcaseTheme2)
                 .singleShot(42)
                 .setShowcaseEventListener(MainActivity.this)
@@ -83,11 +81,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        // mGoogleApiClient.connect();
-    }
+
 
     @Override
     protected void onStop() {
@@ -112,22 +106,49 @@ public class MainActivity extends AppCompatActivity implements
         Intent i = new Intent(this, QuizSelections.class);
         startActivity(i);
     }
-    public void Show(View view) {
-        Intent i = new Intent(this, QuizSelections.class);
-        startActivity(i);
-    }
+
+
     public void showHighScore(View view) {
-        //   mSignInClicked = true;
-        //   mGoogleApiClient.connect();
+    //     mSignInClicked = true;
+     //     mGoogleApiClient.connect();
+        if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
+            startActivityForResult(Games.Leaderboards.getLeaderboardIntent(mGoogleApiClient,
+                    getString(R.string.LEADER_BOARD)), REQUEST_LEADERBOARD);
+        } else {
+            // not signed in. Show the "sign in" button and explanation.
+            // ...
+        }
+
+
     }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (!mInSignInFlow) {
+            // auto sign in
+            mGoogleApiClient.connect();
+        }
+    }
+
+
+
     public void showTutorials(View view) {
         Intent i = new Intent(this, TutorialsSelections.class);
         startActivity(i);
     }
+
     public void showRecords(View view) {
         Intent i = new Intent(this, Records.class);
         startActivity(i);
     }
+
+    public void showAchieve(View view) {
+        startActivityForResult(Games.Achievements.getAchievementsIntent(mGoogleApiClient),
+                101);
+    }
+
 
     @Override
     public void onConnected(Bundle bundle) {
@@ -189,14 +210,9 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
-    // Call when the sign-in button is clicked
-    private void signInClicked() {
-        mSignInClicked = true;
-        mGoogleApiClient.connect();
-    }
 
 
-    // go back  key pressed
+    // go back key pressed
     @Override
     public void onBackPressed() {
 
@@ -235,49 +251,47 @@ public class MainActivity extends AppCompatActivity implements
         switch (counter) {
             case 0:
                 showcaseView.setShowcase(new ViewTarget(findViewById(R.id.btn_tutorial)), true);
-                showcaseView.setContentTitle("Title for btn_tutorial");  /** btn_tutorial Title */
-                showcaseView.setContentText("Content for btn_tutorial");  /** btn_tutorial content */
+                showcaseView.setContentTitle("Tutorials");  /** btn_tutorial Title */
+                showcaseView.setContentText("Several tutorials about word definition");  /** btn_tutorial content */
                 break;
 
             case 1:
                 showcaseView.setShowcase(new ViewTarget(findViewById(R.id.btn_quiz)), true);
-                showcaseView.setContentTitle("Title for btn_quiz");  /** btn_quiz Title */
-                showcaseView.setContentText("Content for btn_quiz");  /** btn_quiz content */
+                showcaseView.setContentTitle("Quiz");  /** btn_quiz Title */
+                showcaseView.setContentText("Two quizzes to test you");  /** btn_quiz content */
                 break;
 
             case 2:
-                //  showcaseView.setTarget(Target.NONE);
-                showcaseView.setShowcase(new ViewTarget(findViewById(R.id.btn_highscore)), true);
-                showcaseView.setContentTitle("Title for btn_highscore");  /** btn_highscore Title */
-                showcaseView.setContentText("Content for btn_highscore");  /** btn_highscore content */
-                showcaseView.setButtonText("Finish");
-                //  showcaseView.setButtonText(getString(R.string.close));
-                //    setAlpha(0.4f, textView1, textView2, textView3);
+              showcaseView.setShowcase(new ViewTarget(findViewById(R.id.btn_record)), true);
+                showcaseView.setContentText("A record of your wrong answer with a correct answer");  /** btn_record Title */
+                showcaseView.setContentTitle("Answer Record");  /** btn_record content */
+
                 break;
 
             case 3:
-                //  showcaseView.setTarget(Target.NONE);
-                showcaseView.setShowcase(new ViewTarget(findViewById(R.id.btn_record)), true);
-                showcaseView.setContentTitle("Title for btn_record");  /** btn_record Title */
-                showcaseView.setContentText("Content for btn_record");  /** btn_record content */
-                showcaseView.setButtonText("Finish");
-                //  showcaseView.setButtonText(getString(R.string.close));
-                //    setAlpha(0.4f, textView1, textView2, textView3);
+                showcaseView.setShowcase(new ViewTarget(findViewById(R.id.btn_highscore)), true);
+                showcaseView.setContentTitle("High Score");  /** btn_highscore Title */
+                showcaseView.setContentText("A leaderboard of two quizzes and the record of your achievements");  /** btn_highscore content */
+
                 break;
 
+
             case 4:
+                showcaseView.setShowcase(new ViewTarget(findViewById(R.id.btn_achieve)), true);
+                showcaseView.setContentText("An achievement list of what you have done!");  /** btn_achieve Title */
+                showcaseView.setContentTitle("Achievement");  /** btn_achieve content */
+                showcaseView.setButtonText("Finish");
+                break;
+
+
+
+            case 5:
                 showcaseView.hide();
-                //  setAlpha(1.0f, textView1, textView2, textView3);
                 break;
         }
         counter++;
     }
 
-
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-    }
 
     @Override
     public void onShowcaseViewHide(ShowcaseView showcaseView) {
