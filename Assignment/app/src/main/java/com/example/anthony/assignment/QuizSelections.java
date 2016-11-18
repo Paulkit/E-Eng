@@ -30,6 +30,7 @@ public class QuizSelections extends AppCompatActivity  /*implements View.OnClick
                 .build();
         showcaseView.setButtonText("Next");*/
     }
+
     public void showQuiz1(View view) {
         Intent i = new Intent(this, Quiz1.class);
         startActivity(i);
@@ -38,8 +39,14 @@ public class QuizSelections extends AppCompatActivity  /*implements View.OnClick
     public void showQuiz2(View view) {
         Intent i = new Intent(this, Quiz2.class);
         startActivity(i);
-
     }
+
+    public void showQuiz3(View view) {
+        Intent i = new Intent(this, Quiz3.class);
+        startActivity(i);
+    }
+
+
 /*
     @Override
     public void onClick(View view) {

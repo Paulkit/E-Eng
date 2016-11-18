@@ -32,6 +32,7 @@
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".Quiz1Result" />
         <activity android:name=".Quiz2" />
+        <activity android:name=".Quiz3" />
         <activity android:name=".Records" />
         <activity android:name=".RecordSearch"/>
         <activity android:name=".TutorialsWordSelections" />
