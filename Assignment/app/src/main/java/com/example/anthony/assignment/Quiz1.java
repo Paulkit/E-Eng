@@ -1,11 +1,14 @@
 package com.example.anthony.assignment;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.view.ContextThemeWrapper;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.util.Xml;
@@ -58,6 +61,8 @@ public class Quiz1 extends AppCompatActivity {
     final String domains[] = {"Sport", "Art", "Literature", "Architecture"};
     String answer ="";
     int score,life,index;
+
+    private AlertDialog.Builder alert;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +76,7 @@ public class Quiz1 extends AppCompatActivity {
         button_Submit = (Button) findViewById(R.id.button_Submit);
         textView2 = (TextView) findViewById(R.id.textView2);
 
+        alert = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.AppThemeNoActionBar));
         setTitle("Word Quiz");
         Random r = new Random();
         int min = 0;
@@ -249,9 +255,23 @@ public class Quiz1 extends AppCompatActivity {
             fout.write(data.getBytes());
             fout.close();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            DialogInterface.OnClickListener Do = new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    onBackPressed();
+                }
+            };
+
+            alertBuilderConfirm("Error occurred", "FileNotFoundException: " + e , "Confirm",Do);
         } catch (IOException e) {
-            e.printStackTrace();
+            DialogInterface.OnClickListener Do = new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    onBackPressed();
+                }
+            };
+
+            alertBuilderConfirm("Error occurred", "IOException: " + e , "Confirm",Do);
         }
     }
 
@@ -261,16 +281,37 @@ public class Quiz1 extends AppCompatActivity {
         try {
             db = dbf.newDocumentBuilder();
         } catch (ParserConfigurationException e) {
-            e.printStackTrace();
+            DialogInterface.OnClickListener Do = new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    onBackPressed();
+                }
+            };
+
+            alertBuilderConfirm("Error occurred", "ParserConfigurationException: " + e , "Confirm",Do);
         }
 
         Document doc = null;
         try {
             doc = db.parse(new InputSource(new StringReader(XMLString)));
         } catch (SAXException e) {
-            e.printStackTrace();
+            DialogInterface.OnClickListener Do = new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    onBackPressed();
+                }
+            };
+
+            alertBuilderConfirm("Error occurred", "SAXException: " + e , "Confirm",Do);
         } catch (IOException e) {
-            e.printStackTrace();
+            DialogInterface.OnClickListener Do = new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    onBackPressed();
+                }
+            };
+
+            alertBuilderConfirm("Error occurred", "IOException: " + e , "Confirm",Do);
         }
         Element root = doc.getDocumentElement();
         NodeList wordsNodeList = root.getElementsByTagName("word");
@@ -300,9 +341,23 @@ public class Quiz1 extends AppCompatActivity {
             fin.close();
             result = sb.toString();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            DialogInterface.OnClickListener Do = new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    onBackPressed();
+                }
+            };
+
+            alertBuilderConfirm("Error occurred", "FileNotFoundException: " + e , "Confirm",Do);
         } catch (IOException e) {
-            e.printStackTrace();
+            DialogInterface.OnClickListener Do = new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    onBackPressed();
+                }
+            };
+
+            alertBuilderConfirm("Error occurred", "IOException: " + e , "Confirm",Do);
         }
         return result;
     }
@@ -313,10 +368,24 @@ public class Quiz1 extends AppCompatActivity {
             FileInputStream fin = openFileInput(filename);
 
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            DialogInterface.OnClickListener Do = new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    onBackPressed();
+                }
+            };
+
+            alertBuilderConfirm("Error occurred", "FileNotFoundException: " + e , "Confirm",Do);
             return false;
         } catch (IOException e) {
-            e.printStackTrace();
+            DialogInterface.OnClickListener Do = new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    onBackPressed();
+                }
+            };
+
+            alertBuilderConfirm("Error occurred", "IOException: " + e , "Confirm",Do);
             return false;
         }
         return true;
@@ -393,8 +462,21 @@ public class Quiz1 extends AppCompatActivity {
                 }
                 return stringBuilder.toString();
 
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (final Exception e) {
+
+                Quiz1.this.runOnUiThread(new Runnable() {
+                    public void run() {
+
+                        DialogInterface.OnClickListener Do = new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                onBackPressed();
+                            }
+                        };
+
+                        alertBuilderConfirm("Error occurred", "Message: " + e , "Confirm",Do);
+                    }
+                });
                 return e.toString();
             }
         }
@@ -452,9 +534,23 @@ public class Quiz1 extends AppCompatActivity {
 
                 fout.close();
             } catch (FileNotFoundException e) {
-                e.printStackTrace();
+                DialogInterface.OnClickListener Do = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        onBackPressed();
+                    }
+                };
+
+                alertBuilderConfirm("Error occurred", "FileNotFoundException: " + e , "Confirm",Do);
             } catch (IOException e) {
-                e.printStackTrace();
+                DialogInterface.OnClickListener Do = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        onBackPressed();
+                    }
+                };
+
+                alertBuilderConfirm("Error occurred", "IOException: " + e , "Confirm",Do);
             }
 
             barProgressDialog.dismiss();
@@ -462,6 +558,17 @@ public class Quiz1 extends AppCompatActivity {
             button_Start.setVisibility(View.VISIBLE);
 
         }
+    }
+
+
+    public void alertBuilderConfirm(String title, String msg, String yes, DialogInterface.OnClickListener yesListen) {
+        alert.setTitle(title);
+        alert.setMessage(msg);
+        alert.setCancelable(false);
+        alert.setPositiveButton(yes, yesListen);
+        alert.show();
+
+
     }
 }
 

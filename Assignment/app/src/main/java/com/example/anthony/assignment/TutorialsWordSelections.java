@@ -1,11 +1,14 @@
 package com.example.anthony.assignment;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.view.ContextThemeWrapper;
 import android.util.Log;
 import android.util.Xml;
 import android.view.View;
@@ -37,12 +40,15 @@ public class TutorialsWordSelections extends AppCompatActivity {
     String[] wordID ;
     ArrayList<String> lst = new ArrayList<String>(Arrays.asList(name));
     String url ;
+    private AlertDialog.Builder alert;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tutorials_word_selections);
         domain = getIntent().getStringExtra("domain");
         setTitle(domain);
+        alert = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.AppThemeNoActionBar));
         lv_TutorialsWords = (ListView) findViewById(R.id.lv_TutorialsWords);
         url = "https://od-api.oxforddictionaries.com:443/api/v1/wordlist/en/lexicalCategory=noun,adjective;domains=" + domain;
 
@@ -89,8 +95,25 @@ public class TutorialsWordSelections extends AppCompatActivity {
                 }
 
 
-            } catch (Exception e) {
+            } catch (final Exception e) {
 
+
+
+                TutorialsWordSelections.this.runOnUiThread(new Runnable() {
+                    public void run() {
+
+                        DialogInterface.OnClickListener Do = new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                onBackPressed();
+                            }
+                        };
+
+                        alertBuilderConfirm("Error occurred", "Message: " + e , "Confirm",Do);
+                    }
+                });
+
+                return e.toString();
             }
                  return "Finish Async";
         }
@@ -128,6 +151,16 @@ public class TutorialsWordSelections extends AppCompatActivity {
 
             Log.i("post",result);
         }
+    }
+
+    public void alertBuilderConfirm(String title, String msg, String yes, DialogInterface.OnClickListener yesListen) {
+        alert.setTitle(title);
+        alert.setMessage(msg);
+        alert.setCancelable(false);
+        alert.setPositiveButton(yes, yesListen);
+        alert.show();
+
+
     }
 
 

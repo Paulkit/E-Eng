@@ -1,8 +1,11 @@
 package com.example.anthony.assignment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.view.ContextThemeWrapper;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -19,6 +22,7 @@ public class RecordSearch extends AppCompatActivity {
     String word;
     ArrayList<String> definitions = new ArrayList<>();
     TextView textView;
+    private AlertDialog.Builder alert;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +30,7 @@ public class RecordSearch extends AppCompatActivity {
          word = getIntent().getStringExtra("word");
         setTitle(word);
         textView= (TextView) findViewById(R.id.textView);
+        alert = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.AppThemeNoActionBar));
         new CallbackTask().execute(dictionaryEntries());
     }
     private String dictionaryEntries() {
@@ -77,9 +82,25 @@ public class RecordSearch extends AppCompatActivity {
                 return stringBuilder.toString();
 
             }
-            catch (Exception e) {
-                e.printStackTrace();
+            catch (final Exception e) {
+
+                RecordSearch.this.runOnUiThread(new Runnable() {
+                    public void run() {
+
+                        DialogInterface.OnClickListener Do = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        onBackPressed();
+                    }
+                };
+
+                alertBuilderConfirm("Error occurred", "IOException: " + e , "Confirm",Do);
+                    }
+                });
+
+
                 return e.toString();
+
             }
         }
 
@@ -95,5 +116,16 @@ public class RecordSearch extends AppCompatActivity {
         }
 
     }
+
+    public void alertBuilderConfirm(String title, String msg, String yes, DialogInterface.OnClickListener yesListen) {
+        alert.setTitle(title);
+        alert.setMessage(msg);
+        alert.setCancelable(false);
+        alert.setPositiveButton(yes, yesListen);
+        alert.show();
+
+
+    }
+
 }
 

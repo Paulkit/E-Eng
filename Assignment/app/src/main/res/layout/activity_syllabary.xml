@@ -1,476 +1,505 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_bg"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
 
-    <TableRow
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="2dp">
+
+            <TextView
+                android:id="@+id/text_a"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginStart="2dp"
+                android:layout_weight="1"
+                android:background="@color/table_cell"
+                android:onClick="playSyllabary"
+                android:padding="10dp"
+                android:text="@string/a"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="normal|bold" />
+
+            <TextView
+                android:id="@+id/text_b"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginStart="2dp"
+                android:layout_weight="1"
+                android:background="@color/table_cell"
+                android:onClick="playSyllabary"
+                android:padding="10dp"
+                android:text="@string/b"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="normal|bold" />
+
+            <TextView
+                android:id="@+id/text_c"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginStart="2dp"
+                android:layout_weight="1"
+                android:background="@color/table_cell"
+                android:onClick="playSyllabary"
+                android:padding="10dp"
+                android:text="@string/c"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="normal|bold" />
+
+            <TextView
+                android:id="@+id/text_d"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_weight="1"
+                android:background="@color/table_cell"
+                android:onClick="playSyllabary"
+                android:padding="10dp"
+                android:text="@string/d"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="normal|bold" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="2dp">
+
+            <TextView
+                android:id="@+id/text_e"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginStart="2dp"
+                android:layout_weight="1"
+                android:background="@color/table_cell"
+                android:onClick="playSyllabary"
+                android:padding="10dp"
+                android:text="@string/e"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="normal|bold" />
+
+            <TextView
+                android:id="@+id/text_f"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginStart="2dp"
+                android:layout_weight="1"
+                android:background="@color/table_cell"
+                android:onClick="playSyllabary"
+                android:padding="10dp"
+                android:text="@string/f"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="normal|bold" />
+
+            <TextView
+                android:id="@+id/text_g"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginStart="2dp"
+                android:layout_weight="1"
+                android:background="@color/table_cell"
+                android:onClick="playSyllabary"
+                android:padding="10dp"
+                android:text="@string/g"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="normal|bold" />
+
+            <TextView
+                android:id="@+id/text_h"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_weight="1"
+                android:background="@color/table_cell"
+                android:onClick="playSyllabary"
+                android:padding="10dp"
+                android:text="@string/h"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="normal|bold" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="2dp">
+
+            <TextView
+                android:id="@+id/text_i"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginStart="2dp"
+                android:layout_weight="1"
+                android:background="@color/table_cell"
+                android:onClick="playSyllabary"
+                android:padding="10dp"
+                android:text="@string/i"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="normal|bold" />
+
+            <TextView
+                android:id="@+id/text_j"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginStart="2dp"
+                android:layout_weight="1"
+                android:background="@color/table_cell"
+                android:onClick="playSyllabary"
+                android:padding="10dp"
+                android:text="@string/j"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="normal|bold" />
+
+            <TextView
+                android:id="@+id/text_k"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginStart="2dp"
+                android:layout_weight="1"
+                android:background="@color/table_cell"
+                android:onClick="playSyllabary"
+                android:padding="10dp"
+                android:text="@string/k"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="normal|bold" />
+
+            <TextView
+                android:id="@+id/text_l"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_weight="1"
+                android:background="@color/table_cell"
+                android:onClick="playSyllabary"
+                android:padding="10dp"
+                android:text="@string/l"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="normal|bold" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="2dp">
+
+            <TextView
+                android:id="@+id/text_m"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginStart="2dp"
+                android:layout_weight="1"
+                android:background="@color/table_cell"
+                android:onClick="playSyllabary"
+                android:padding="10dp"
+                android:text="@string/m"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="normal|bold" />
+
+            <TextView
+                android:id="@+id/text_n"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginStart="2dp"
+                android:layout_weight="1"
+                android:background="@color/table_cell"
+                android:onClick="playSyllabary"
+                android:padding="10dp"
+                android:text="@string/n"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="normal|bold" />
+
+            <TextView
+                android:id="@+id/text_o"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginStart="2dp"
+                android:layout_weight="1"
+                android:background="@color/table_cell"
+                android:onClick="playSyllabary"
+                android:padding="10dp"
+                android:text="@string/o"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="normal|bold" />
+
+            <TextView
+                android:id="@+id/text_p"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_weight="1"
+                android:background="@color/table_cell"
+                android:onClick="playSyllabary"
+                android:padding="10dp"
+                android:text="@string/p"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="normal|bold" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="2dp">
+
+            <TextView
+                android:id="@+id/text_q"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginStart="2dp"
+                android:layout_weight="1"
+                android:background="@color/table_cell"
+                android:onClick="playSyllabary"
+                android:padding="10dp"
+                android:text="@string/q"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="normal|bold" />
+
+            <TextView
+                android:id="@+id/text_r"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginStart="2dp"
+                android:layout_weight="1"
+                android:background="@color/table_cell"
+                android:onClick="playSyllabary"
+                android:padding="10dp"
+                android:text="@string/r"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="normal|bold" />
+
+            <TextView
+                android:id="@+id/text_s"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginStart="2dp"
+                android:layout_weight="1"
+                android:background="@color/table_cell"
+                android:onClick="playSyllabary"
+                android:padding="10dp"
+                android:text="@string/s"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="normal|bold" />
+
+            <TextView
+                android:id="@+id/text_t"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_weight="1"
+                android:background="@color/table_cell"
+                android:onClick="playSyllabary"
+                android:padding="10dp"
+                android:text="@string/t"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="normal|bold" />
+
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="2dp">
+
+            <TextView
+                android:id="@+id/text_u"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginStart="2dp"
+                android:layout_weight="1"
+                android:background="@color/table_cell"
+                android:onClick="playSyllabary"
+                android:padding="10dp"
+                android:text="@string/u"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="normal|bold" />
+
+            <TextView
+                android:id="@+id/text_v"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginStart="2dp"
+                android:layout_weight="1"
+                android:background="@color/table_cell"
+                android:onClick="playSyllabary"
+                android:padding="10dp"
+                android:text="@string/v"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="normal|bold" />
+
+            <TextView
+                android:id="@+id/text_w"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginStart="2dp"
+                android:layout_weight="1"
+                android:background="@color/table_cell"
+                android:onClick="playSyllabary"
+                android:padding="10dp"
+                android:text="@string/w"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="normal|bold" />
+
+            <TextView
+                android:id="@+id/text_x"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_weight="1"
+                android:background="@color/table_cell"
+                android:onClick="playSyllabary"
+                android:padding="10dp"
+                android:text="@string/x"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="normal|bold" />
+
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="2dp">
+
+            <TextView
+                android:id="@+id/text_y"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginStart="2dp"
+                android:layout_weight="1"
+                android:background="@color/table_cell"
+                android:onClick="playSyllabary"
+                android:padding="10dp"
+                android:text="@string/y"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="normal|bold" />
+
+            <TextView
+                android:id="@+id/text_z"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginStart="2dp"
+                android:layout_weight="1"
+                android:background="@color/table_cell"
+                android:onClick="playSyllabary"
+                android:padding="10dp"
+                android:text="@string/z"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="normal|bold" />
+
+            <TextView
+                android:id="@+id/empty1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginStart="2dp"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:text=""
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="normal|bold" />
+
+            <TextView
+                android:id="@+id/empty"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:text=""
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="normal|bold" />
+
+
+        </TableRow>
+
+
+    </TableLayout>
+
+    <RelativeLayout
+        android:id="@+id/grey_background"
+        android:background="@color/grey_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="2dp">
-
-        <TextView
-            android:id="@+id/text_a"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
-            android:layout_marginStart="2dp"
-            android:layout_weight="1"
-            android:background="@color/table_cell"
-            android:onClick="playSyllabary"
-            android:padding="10dp"
-            android:text="@string/a"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:textStyle="normal|bold" />
-
-        <TextView
-            android:id="@+id/text_b"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
-            android:layout_marginStart="2dp"
-            android:layout_weight="1"
-            android:background="@color/table_cell"
-            android:onClick="playSyllabary"
-            android:padding="10dp"
-            android:text="@string/b"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:textStyle="normal|bold" />
-
-        <TextView
-            android:id="@+id/text_c"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
-            android:layout_marginStart="2dp"
-            android:layout_weight="1"
-            android:background="@color/table_cell"
-            android:onClick="playSyllabary"
-            android:padding="10dp"
-            android:text="@string/c"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:textStyle="normal|bold" />
-
-        <TextView
-            android:id="@+id/text_d"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            android:layout_weight="1"
-            android:background="@color/table_cell"
-            android:onClick="playSyllabary"
-            android:padding="10dp"
-            android:text="@string/d"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:textStyle="normal|bold" />
-
-    </TableRow>
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="2dp">
-
-        <TextView
-            android:id="@+id/text_e"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
-            android:layout_marginStart="2dp"
-            android:layout_weight="1"
-            android:background="@color/table_cell"
-            android:onClick="playSyllabary"
-            android:padding="10dp"
-            android:text="@string/e"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:textStyle="normal|bold" />
-
-        <TextView
-            android:id="@+id/text_f"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
-            android:layout_marginStart="2dp"
-            android:layout_weight="1"
-            android:background="@color/table_cell"
-            android:onClick="playSyllabary"
-            android:padding="10dp"
-            android:text="@string/f"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:textStyle="normal|bold" />
-
-        <TextView
-            android:id="@+id/text_g"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
-            android:layout_marginStart="2dp"
-            android:layout_weight="1"
-            android:background="@color/table_cell"
-            android:onClick="playSyllabary"
-            android:padding="10dp"
-            android:text="@string/g"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:textStyle="normal|bold" />
-
-        <TextView
-            android:id="@+id/text_h"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            android:layout_weight="1"
-            android:background="@color/table_cell"
-            android:onClick="playSyllabary"
-            android:padding="10dp"
-            android:text="@string/h"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:textStyle="normal|bold" />
-
-    </TableRow>
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="2dp">
-
-        <TextView
-            android:id="@+id/text_i"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
-            android:layout_marginStart="2dp"
-            android:layout_weight="1"
-            android:background="@color/table_cell"
-            android:onClick="playSyllabary"
-            android:padding="10dp"
-            android:text="@string/i"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:textStyle="normal|bold" />
-
-        <TextView
-            android:id="@+id/text_j"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
-            android:layout_marginStart="2dp"
-            android:layout_weight="1"
-            android:background="@color/table_cell"
-            android:onClick="playSyllabary"
-            android:padding="10dp"
-            android:text="@string/j"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:textStyle="normal|bold" />
-
-        <TextView
-            android:id="@+id/text_k"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
-            android:layout_marginStart="2dp"
-            android:layout_weight="1"
-            android:background="@color/table_cell"
-            android:onClick="playSyllabary"
-            android:padding="10dp"
-            android:text="@string/k"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:textStyle="normal|bold" />
-
-        <TextView
-            android:id="@+id/text_l"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            android:layout_weight="1"
-            android:background="@color/table_cell"
-            android:onClick="playSyllabary"
-            android:padding="10dp"
-            android:text="@string/l"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:textStyle="normal|bold" />
-
-    </TableRow>
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="2dp">
-
-        <TextView
-            android:id="@+id/text_m"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
-            android:layout_marginStart="2dp"
-            android:layout_weight="1"
-            android:background="@color/table_cell"
-            android:onClick="playSyllabary"
-            android:padding="10dp"
-            android:text="@string/m"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:textStyle="normal|bold" />
-
-        <TextView
-            android:id="@+id/text_n"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
-            android:layout_marginStart="2dp"
-            android:layout_weight="1"
-            android:background="@color/table_cell"
-            android:onClick="playSyllabary"
-            android:padding="10dp"
-            android:text="@string/n"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:textStyle="normal|bold" />
-
-        <TextView
-            android:id="@+id/text_o"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
-            android:layout_marginStart="2dp"
-            android:layout_weight="1"
-            android:background="@color/table_cell"
-            android:onClick="playSyllabary"
-            android:padding="10dp"
-            android:text="@string/o"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:textStyle="normal|bold" />
-
-        <TextView
-            android:id="@+id/text_p"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            android:layout_weight="1"
-            android:background="@color/table_cell"
-            android:onClick="playSyllabary"
-            android:padding="10dp"
-            android:text="@string/p"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:textStyle="normal|bold" />
-
-    </TableRow>
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="2dp">
-
-        <TextView
-            android:id="@+id/text_q"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
-            android:layout_marginStart="2dp"
-            android:layout_weight="1"
-            android:background="@color/table_cell"
-            android:onClick="playSyllabary"
-            android:padding="10dp"
-            android:text="@string/q"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:textStyle="normal|bold" />
-
-        <TextView
-            android:id="@+id/text_r"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
-            android:layout_marginStart="2dp"
-            android:layout_weight="1"
-            android:background="@color/table_cell"
-            android:onClick="playSyllabary"
-            android:padding="10dp"
-            android:text="@string/r"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:textStyle="normal|bold" />
-
-        <TextView
-            android:id="@+id/text_s"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
-            android:layout_marginStart="2dp"
-            android:layout_weight="1"
-            android:background="@color/table_cell"
-            android:onClick="playSyllabary"
-            android:padding="10dp"
-            android:text="@string/s"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:textStyle="normal|bold" />
-
-        <TextView
-            android:id="@+id/text_t"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            android:layout_weight="1"
-            android:background="@color/table_cell"
-            android:onClick="playSyllabary"
-            android:padding="10dp"
-            android:text="@string/t"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:textStyle="normal|bold" />
-
-    </TableRow>
-
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="2dp">
-
-        <TextView
-            android:id="@+id/text_u"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
-            android:layout_marginStart="2dp"
-            android:layout_weight="1"
-            android:background="@color/table_cell"
-            android:onClick="playSyllabary"
-            android:padding="10dp"
-            android:text="@string/u"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:textStyle="normal|bold" />
-
-        <TextView
-            android:id="@+id/text_v"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
-            android:layout_marginStart="2dp"
-            android:layout_weight="1"
-            android:background="@color/table_cell"
-            android:onClick="playSyllabary"
-            android:padding="10dp"
-            android:text="@string/v"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:textStyle="normal|bold" />
-
-        <TextView
-            android:id="@+id/text_w"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
-            android:layout_marginStart="2dp"
-            android:layout_weight="1"
-            android:background="@color/table_cell"
-            android:onClick="playSyllabary"
-            android:padding="10dp"
-            android:text="@string/w"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:textStyle="normal|bold" />
-
-        <TextView
-            android:id="@+id/text_x"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            android:layout_weight="1"
-            android:background="@color/table_cell"
-            android:onClick="playSyllabary"
-            android:padding="10dp"
-            android:text="@string/x"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:textStyle="normal|bold" />
-
-    </TableRow>
-
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="2dp">
-
-        <TextView
-            android:id="@+id/text_y"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
-            android:layout_marginStart="2dp"
-            android:layout_weight="1"
-            android:background="@color/table_cell"
-            android:onClick="playSyllabary"
-            android:padding="10dp"
-            android:text="@string/y"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:textStyle="normal|bold" />
-
-        <TextView
-            android:id="@+id/text_z"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
-            android:layout_marginStart="2dp"
-            android:layout_weight="1"
-            android:background="@color/table_cell"
-            android:onClick="playSyllabary"
-            android:padding="10dp"
-            android:text="@string/z"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:textStyle="normal|bold" />
-
-        <TextView
-            android:id="@+id/empty1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
-            android:layout_marginStart="2dp"
-            android:layout_weight="1"
-            android:padding="10dp"
-            android:text=""
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:textStyle="normal|bold" />
-
-        <TextView
-            android:id="@+id/empty"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            android:layout_weight="1"
-            android:padding="10dp"
-            android:text=""
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:textStyle="normal|bold" />
-
-
-    </TableRow>
-
-
-</TableLayout>
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:visibility="gone"
+        android:layout_alignParentStart="true">
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/avi"
+        style="@style/AVLoadingIndicatorView"
+        app:indicatorColor="@color/colorPrimary"
+        app:indicatorName="BallPulseIndicator"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        />
+</RelativeLayout>
+</RelativeLayout>

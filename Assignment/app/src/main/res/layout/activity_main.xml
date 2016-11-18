@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
@@ -17,11 +18,19 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
+        android:textColor="#000"
         android:fontFamily="serif"
         android:text="@string/title"
         android:textSize="30sp"
         android:textStyle="normal|bold" />
-    <Button
+    <info.hoang8f.widget.FButton
+        fbutton:buttonColor="@color/colorPrimary2"
+        fbutton:shadowColor="@color/colorPrimaryDark"
+        fbutton:shadowEnabled="true"
+        fbutton:shadowHeight="5dp"
+        fbutton:cornerRadius="5dp"
+        android:textColor="@color/white"
+
         android:id="@+id/btn_syllabary"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -33,7 +42,13 @@
         android:text="@string/btn_syllabary"
         android:textSize="18sp" />
 
-    <Button
+    <info.hoang8f.widget.FButton
+        fbutton:buttonColor="@color/colorPrimary2"
+        fbutton:shadowColor="@color/colorPrimaryDark"
+        fbutton:shadowEnabled="true"
+        fbutton:shadowHeight="5dp"
+        fbutton:cornerRadius="5dp"
+        android:textColor="@color/white"
         android:id="@+id/btn_quiz"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -45,7 +60,14 @@
         android:text="@string/btn_quiz"
         android:textSize="18sp" />
 
-    <Button
+    <info.hoang8f.widget.FButton
+        fbutton:buttonColor="@color/colorPrimary2"
+        fbutton:shadowColor="@color/colorPrimaryDark"
+        fbutton:shadowEnabled="true"
+        fbutton:shadowHeight="5dp"
+        fbutton:cornerRadius="5dp"
+        android:textColor="@color/white"
+
         android:id="@+id/btn_tutorial"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -56,7 +78,14 @@
         android:onClick="showTutorials"
         android:text="Tutorials"
         android:textSize="18sp" />
-    <Button
+    <info.hoang8f.widget.FButton
+        fbutton:buttonColor="@color/colorPrimary2"
+        fbutton:shadowColor="@color/colorPrimaryDark"
+        fbutton:shadowEnabled="true"
+        fbutton:shadowHeight="5dp"
+        fbutton:cornerRadius="5dp"
+        android:textColor="@color/white"
+
         android:id="@+id/btn_highscore"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -70,7 +99,14 @@
 
 
 
-    <Button
+    <info.hoang8f.widget.FButton
+        fbutton:buttonColor="@color/colorPrimary2"
+        fbutton:shadowColor="@color/colorPrimaryDark"
+        fbutton:shadowEnabled="true"
+        fbutton:shadowHeight="5dp"
+        fbutton:cornerRadius="5dp"
+        android:textColor="@color/white"
+
         android:id="@+id/btn_record"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -84,7 +120,6 @@
 
     <com.wang.avi.AVLoadingIndicatorView
         android:id="@+id/avi"
-
         style="@style/AVLoadingIndicatorView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

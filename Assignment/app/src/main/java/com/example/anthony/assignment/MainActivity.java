@@ -234,28 +234,38 @@ public class MainActivity extends AppCompatActivity implements
     public void onClick(View v) {
         switch (counter) {
             case 0:
-                showcaseView.setShowcase(new ViewTarget(findViewById(R.id.btn_quiz)), true);
-                showcaseView.setContentTitle("Title for btn_quiz");  /** Syllabary Title */
-                showcaseView.setContentText("Content for btn_quiz");  /** Syllabary Title */
+                showcaseView.setShowcase(new ViewTarget(findViewById(R.id.btn_tutorial)), true);
+                showcaseView.setContentTitle("Title for btn_tutorial");  /** btn_tutorial Title */
+                showcaseView.setContentText("Content for btn_tutorial");  /** btn_tutorial content */
                 break;
 
             case 1:
-                showcaseView.setShowcase(new ViewTarget(findViewById(R.id.btn_highscore)), true);
-                showcaseView.setContentTitle("Title for btn_highscore");  /** Syllabary Title */
-                showcaseView.setContentText("Content for btn_highscore");  /** Syllabary Title */
+                showcaseView.setShowcase(new ViewTarget(findViewById(R.id.btn_quiz)), true);
+                showcaseView.setContentTitle("Title for btn_quiz");  /** btn_quiz Title */
+                showcaseView.setContentText("Content for btn_quiz");  /** btn_quiz content */
                 break;
 
             case 2:
                 //  showcaseView.setTarget(Target.NONE);
-                showcaseView.setShowcase(new ViewTarget(findViewById(R.id.btn_record)), true);
-                showcaseView.setContentTitle("Title for btn_record");  /** Syllabary Title */
-                showcaseView.setContentText("Content for btn_record");  /** Syllabary Title */
+                showcaseView.setShowcase(new ViewTarget(findViewById(R.id.btn_highscore)), true);
+                showcaseView.setContentTitle("Title for btn_highscore");  /** btn_highscore Title */
+                showcaseView.setContentText("Content for btn_highscore");  /** btn_highscore content */
                 showcaseView.setButtonText("Finish");
                 //  showcaseView.setButtonText(getString(R.string.close));
                 //    setAlpha(0.4f, textView1, textView2, textView3);
                 break;
 
             case 3:
+                //  showcaseView.setTarget(Target.NONE);
+                showcaseView.setShowcase(new ViewTarget(findViewById(R.id.btn_record)), true);
+                showcaseView.setContentTitle("Title for btn_record");  /** btn_record Title */
+                showcaseView.setContentText("Content for btn_record");  /** btn_record content */
+                showcaseView.setButtonText("Finish");
+                //  showcaseView.setButtonText(getString(R.string.close));
+                //    setAlpha(0.4f, textView1, textView2, textView3);
+                break;
+
+            case 4:
                 showcaseView.hide();
                 //  setAlpha(1.0f, textView1, textView2, textView3);
                 break;
