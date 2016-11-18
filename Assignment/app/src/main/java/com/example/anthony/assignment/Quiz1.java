@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.anthony.assignment.usefulClass.App;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
@@ -68,7 +69,7 @@ public class Quiz1 extends AppCompatActivity   implements
     final String domains[] = {"Sport", "Art", "Literature", "Architecture"};
     String answer ="";
     int score,life,index;
-
+    boolean connected = false;
     private AlertDialog.Builder alert;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,13 +91,14 @@ public class Quiz1 extends AppCompatActivity   implements
         int max = domains.length-1;
         domain = domains[r.nextInt(max - min + 1) + min];
 
+        //Check if connected
+        if(App.getGoogleApiHelper().isConnected())
+        {
+            //Get google api client
+            connected = true;
+            mGoogleApiClient = App.getGoogleApiHelper().getGoogleApiClient();
+        }
 
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(Games.API).addScope(Games.SCOPE_GAMES)
-                // add other APIs and scopes here as needed
-                .build();
 
         if (readDataFromFile(domain + ".xml") == false) {
             new CallbackTask().execute(wordlist());
@@ -181,18 +183,18 @@ public class Quiz1 extends AppCompatActivity   implements
             if (et_Input.getText().toString().toLowerCase().equals(answer)){
                 et_Input.setText("");
                 score++;
+                if(connected) {
+                    if (score == 5) {
+                        Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_Reach_10_word));
 
-                if(score==5){
-                    Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_Reach_10_word));
+                    } else if (score == 50) {
+                        Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_Reach_50_word));
 
-                }else if(score==50){
-                    Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_Reach_50_word));
+                    } else if (score == 100) {
+                        Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_Reach_100_word));
 
-                }else if(score==100){
-                    Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_Reach_100_word));
-
+                    }
                 }
-
                 tv_Score.setText("Score: " + score);
                 index++;
                 answer = words.get(index).getName();

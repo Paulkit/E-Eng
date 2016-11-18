@@ -19,6 +19,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.anthony.assignment.usefulClass.App;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
@@ -52,6 +53,7 @@ public class Quiz3 extends AppCompatActivity implements
     ArrayList<String> words = new ArrayList<String>();
     ArrayList<String> wrong = new ArrayList<String>();
     private GoogleApiClient mGoogleApiClient;
+    boolean connected = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,13 +74,13 @@ public class Quiz3 extends AppCompatActivity implements
         tv_Question= (TextView) findViewById(R.id.tv_Question);
         textView= (TextView) findViewById(R.id.textView);
 
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(Games.API).addScope(Games.SCOPE_GAMES)
-                // add other APIs and scopes here as needed
-                .build();
-
+        //Check if connected
+        if(App.getGoogleApiHelper().isConnected())
+        {
+            //Get google api client
+            connected = true;
+            mGoogleApiClient = App.getGoogleApiHelper().getGoogleApiClient();
+        }
 
 
     }
@@ -119,16 +121,17 @@ public class Quiz3 extends AppCompatActivity implements
         if (txtOutput.getText().toString().toLowerCase().equals(answer)) {
             txtOutput.setText("");
             score++;
+            if(connected) {
+                if (score == 5) {
+                    Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_reach_10_marks_in_speaking_quiz));
 
-            if(score==5){
-                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_reach_10_marks_in_speaking_quiz));
+                } else if (score == 50) {
+                    Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_reach_50_marks_in_speaking_quiz));
 
-            }else if(score==50){
-                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_reach_50_marks_in_speaking_quiz));
+                } else if (score == 100) {
+                    Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_reach_100_marks_in_speaking_quiz));
 
-            }else if(score==100){
-                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_reach_100_marks_in_speaking_quiz));
-
+                }
             }
             tv_Score.setText("Score: " + score);
             GenNewAnswer();

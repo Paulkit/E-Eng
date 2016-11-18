@@ -1,5 +1,6 @@
 package com.example.anthony.assignment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.anthony.assignment.usefulClass.App;
 import com.example.anthony.assignment.usefulClass.Config;
 import com.github.amlcurran.showcaseview.OnShowcaseEventListener;
 import com.github.amlcurran.showcaseview.ShowcaseView;
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener, View.OnClickListener,
         OnShowcaseEventListener {
     public GoogleApiClient mGoogleApiClient;
+    public static Context mContext;
     private long mLastClickTime = 0;
     private com.wang.avi.AVLoadingIndicatorView prograss_indecator;
     private static int REQUEST_LEADERBOARD = 100; //  indeed an arbitrary int that you define by yourself.
@@ -40,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setTitle("Learning English");
+        mContext = this;
         prograss_indecator = (com.wang.avi.AVLoadingIndicatorView) findViewById(R.id.avi);
         // Create the Google Api Client with access to the Play Games services
 
@@ -51,7 +55,12 @@ public class MainActivity extends AppCompatActivity implements
                 .build();
 
 
-
+        //Check if connected
+        if(App.getGoogleApiHelper().isConnected())
+        {
+            //Get google api client
+            mGoogleApiClient = App.getGoogleApiHelper().getGoogleApiClient();
+        }
 
         /** Syllabary description  */
         ViewTarget target = new ViewTarget(R.id.btn_syllabary, this);
