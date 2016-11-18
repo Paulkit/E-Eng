@@ -2,9 +2,6 @@ package com.example.anthony.assignment;
 
 import java.util.ArrayList;
 
-/**
- * Created by Lam Chun Hei on 14/11/2016.
- */
 
 public class WordData {
 

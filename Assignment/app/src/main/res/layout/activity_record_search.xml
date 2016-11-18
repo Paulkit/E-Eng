@@ -21,4 +21,16 @@
         android:maxLines="20"
         android:textSize="18dp"
         />
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/speak"
+        android:id="@+id/imageView"
+        android:layout_marginRight="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="15dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="playsound" />
 </RelativeLayout>

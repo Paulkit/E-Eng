@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -32,7 +33,7 @@ public class Quiz2 extends AppCompatActivity {
     int score, life;
     String answer = "";
     ArrayList<String> words = new ArrayList<String>();
-    Button button_Play;
+    ImageView button_Play;
     ArrayList<String> wrong = new ArrayList<String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,7 @@ public class Quiz2 extends AppCompatActivity {
         tv_Score = (TextView) findViewById(R.id.tv_Score);
         tv_Life = (TextView) findViewById(R.id.tv_Life);
         et_Input = (EditText) findViewById(R.id.et_Input);
-        button_Play = (Button) findViewById(R.id.button_Play);
+        button_Play = (ImageView) findViewById(R.id.button_Play);
         button_Submit = (Button) findViewById(R.id.button_Submit);
         textView2 = (TextView) findViewById(R.id.textView2);
         button_Start = (Button) findViewById(R.id.button_Start);

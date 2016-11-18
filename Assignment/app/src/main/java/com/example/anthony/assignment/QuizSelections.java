@@ -23,4 +23,9 @@ public class QuizSelections extends AppCompatActivity {
         startActivity(i);
 
     }
+    public void showQuiz3(View view) {
+        Intent i = new Intent(this, Quiz3.class);
+        startActivity(i);
+
+    }
 }

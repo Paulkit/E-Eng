@@ -2,10 +2,12 @@ package com.example.anthony.assignment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.view.ContextThemeWrapper;
+import android.view.View;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -19,9 +21,10 @@ import java.util.ArrayList;
 import javax.net.ssl.HttpsURLConnection;
 
 public class RecordSearch extends AppCompatActivity {
-    String word;
+    String word,mp3;
     ArrayList<String> definitions = new ArrayList<>();
     TextView textView;
+    private MediaPlayer mediaPlayer;
     private AlertDialog.Builder alert;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +42,6 @@ public class RecordSearch extends AppCompatActivity {
         return "https://od-api.oxforddictionaries.com:443/api/v1/entries/" + language + "/" + word_id;
     }
 
-
-    //in android calling network requests on the main thread forbidden by default
-    //create class to do async job
     private class CallbackTask extends AsyncTask<String, Integer, String> {
 
         @Override
@@ -78,6 +78,16 @@ public class RecordSearch extends AppCompatActivity {
                             definitions.add(sensesArray.getJSONObject(a).getJSONArray("definitions").getString(0));
                         } else break;
                     }
+                }
+                JSONArray pronunciationsArray = lexicalEntriesArray.getJSONObject(0).getJSONArray("pronunciations");
+
+                for (int i = 0; i < pronunciationsArray.length(); i++) {
+                    if(pronunciationsArray.getJSONObject(i).has("audioFile")) {
+                        JSONObject j = pronunciationsArray.getJSONObject(i);
+                        mp3 = j.getString("audioFile");
+                    }
+
+
                 }
                 return stringBuilder.toString();
 
@@ -116,7 +126,13 @@ public class RecordSearch extends AppCompatActivity {
         }
 
     }
-
+    public void playsound(View view){
+        try {
+            playAudio(mp3);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public void alertBuilderConfirm(String title, String msg, String yes, DialogInterface.OnClickListener yesListen) {
         alert.setTitle(title);
         alert.setMessage(msg);
@@ -124,7 +140,24 @@ public class RecordSearch extends AppCompatActivity {
         alert.setPositiveButton(yes, yesListen);
         alert.show();
 
+    }
+    private void playAudio(String url) throws Exception {
+        killMediaPlayer();
 
+        mediaPlayer = new MediaPlayer();
+        mediaPlayer.setDataSource(url);
+        mediaPlayer.prepare();
+        mediaPlayer.start();
+    }
+
+    private void killMediaPlayer() {
+        if (mediaPlayer != null) {
+            try {
+                mediaPlayer.release();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }

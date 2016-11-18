@@ -22,7 +22,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:onClick="showQuiz2"
-        android:text="Listerning Quiz"
+        android:text="Listening Quiz"
         android:textSize="18sp"
         android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/btn_quiz"
@@ -46,5 +46,33 @@
         android:layout_above="@+id/btn_quiz2"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="75dp" />
+
+    <info.hoang8f.widget.FButton
+        fbutton:buttonColor="@color/colorPrimary2"
+        fbutton:shadowColor="@color/colorPrimaryDark"
+        fbutton:shadowEnabled="true"
+        fbutton:shadowHeight="5dp"
+        fbutton:cornerRadius="5dp"
+        android:textColor="@color/white"
+        android:id="@+id/btn_quiz3"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:onClick="showQuiz3"
+        android:text="Speaking Quiz"
+        android:textSize="18sp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/btn_quiz2"
+        android:layout_alignStart="@+id/btn_quiz2"
+        android:layout_marginBottom="50dp" />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/scrabble"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:id="@+id/imageView2" />
+
 
 </RelativeLayout>

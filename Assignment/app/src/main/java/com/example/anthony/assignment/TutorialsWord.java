@@ -2,10 +2,13 @@ package com.example.anthony.assignment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.view.ContextThemeWrapper;
+import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -19,9 +22,9 @@ import java.util.ArrayList;
 import javax.net.ssl.HttpsURLConnection;
 
 public class TutorialsWord extends AppCompatActivity {
-    String wordName,wordID;
+    String wordName,wordID,mp3;
     ArrayList<String> definitions = new ArrayList<>();
-    TextView textView;
+    TextView textView; private MediaPlayer mediaPlayer;
     private AlertDialog.Builder alert;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +43,6 @@ public class TutorialsWord extends AppCompatActivity {
         return "https://od-api.oxforddictionaries.com:443/api/v1/entries/" + language + "/" + wordID;
     }
 
-
-    //in android calling network requests on the main thread forbidden by default
-    //create class to do async job
     private class CallbackTask extends AsyncTask<String, Integer, String> {
 
         @Override
@@ -79,6 +79,17 @@ public class TutorialsWord extends AppCompatActivity {
                             definitions.add(sensesArray.getJSONObject(a).getJSONArray("definitions").getString(0));
                         } else break;
                     }
+
+                }
+                JSONArray pronunciationsArray = lexicalEntriesArray.getJSONObject(0).getJSONArray("pronunciations");
+
+                for (int i = 0; i < pronunciationsArray.length(); i++) {
+                    if(pronunciationsArray.getJSONObject(i).has("audioFile")) {
+                        JSONObject j = pronunciationsArray.getJSONObject(i);
+                        mp3 = j.getString("audioFile");
+                    }
+
+
                 }
                 return stringBuilder.toString();
 
@@ -125,6 +136,32 @@ public class TutorialsWord extends AppCompatActivity {
         alert.setCancelable(false);
         alert.setPositiveButton(yes, yesListen);
         alert.show();
+    }
+
+    public void playsound(View view){
+        try {
+            playAudio(mp3);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private void playAudio(String url) throws Exception {
+        killMediaPlayer();
+
+        mediaPlayer = new MediaPlayer();
+        mediaPlayer.setDataSource(url);
+        mediaPlayer.prepare();
+        mediaPlayer.start();
+    }
+
+    private void killMediaPlayer() {
+        if (mediaPlayer != null) {
+            try {
+                mediaPlayer.release();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
 

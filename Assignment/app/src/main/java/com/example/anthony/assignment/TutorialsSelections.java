@@ -12,7 +12,7 @@ import android.widget.ListView;
 
 public class TutorialsSelections extends AppCompatActivity {
 
-    String [] list = {"Sport", "Art", "Literature", "Architecture"};
+    String [] list = {"Sport", "Art", "Literature", "Architecture","Transport","Technology","Food","Music","Computing","Politics","Medicine"};
     ListView lv_Tutorials;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
