@@ -90,7 +90,7 @@ public class Quiz2 extends AppCompatActivity implements
             et_Input.setText("");
             score++;
 
-            if(score==10){
+            if(score==5){
                 Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_Reach_10_listening));
 
             }else if(score==50){

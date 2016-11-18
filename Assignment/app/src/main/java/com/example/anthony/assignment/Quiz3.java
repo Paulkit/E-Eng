@@ -8,6 +8,8 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.speech.RecognizerIntent;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,7 +22,9 @@ import android.widget.Toast;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.games.Games;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -34,7 +38,9 @@ import java.util.Random;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class Quiz3 extends AppCompatActivity {
+public class Quiz3 extends AppCompatActivity implements
+        GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener {
     private final int SPEECH_RECOGNITION_CODE = 1;
     private MediaPlayer mediaPlayer;
     private TextView txtOutput,textView;
@@ -45,6 +51,7 @@ public class Quiz3 extends AppCompatActivity {
     String answer = "";
     ArrayList<String> words = new ArrayList<String>();
     ArrayList<String> wrong = new ArrayList<String>();
+    private GoogleApiClient mGoogleApiClient;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +71,16 @@ public class Quiz3 extends AppCompatActivity {
         button_Start = (Button) findViewById(R.id.button_Start);
         tv_Question= (TextView) findViewById(R.id.tv_Question);
         textView= (TextView) findViewById(R.id.textView);
+
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(Games.API).addScope(Games.SCOPE_GAMES)
+                // add other APIs and scopes here as needed
+                .build();
+
+
+
     }
     public void startQuiz(View view) {
         score = 0;
@@ -102,6 +119,17 @@ public class Quiz3 extends AppCompatActivity {
         if (txtOutput.getText().toString().toLowerCase().equals(answer)) {
             txtOutput.setText("");
             score++;
+
+            if(score==5){
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_reach_10_marks_in_speaking_quiz));
+
+            }else if(score==50){
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_reach_50_marks_in_speaking_quiz));
+
+            }else if(score==100){
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_reach_100_marks_in_speaking_quiz));
+
+            }
             tv_Score.setText("Score: " + score);
             GenNewAnswer();
         } else {
@@ -151,6 +179,22 @@ public class Quiz3 extends AppCompatActivity {
         new CallbackTask().execute("https://ssl.gstatic.com/dictionary/static/sounds/de/0/" + answer + ".mp3");
 
     }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
     private class CallbackTask extends AsyncTask<String, Integer, String> {
 
         @Override

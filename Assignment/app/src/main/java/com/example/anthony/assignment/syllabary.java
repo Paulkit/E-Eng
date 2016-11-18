@@ -78,8 +78,13 @@ public class syllabary extends AppCompatActivity {
             }
             catch (Exception e) {
                 e.printStackTrace();
-
-                alertBuilderConfirm("Error occurred", "Message: " + e, "Confirm",null);
+                DialogInterface.OnClickListener yesListen = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        onBackPressed();
+                    }
+                };
+                alertBuilderConfirm("Error occurred", "Message: " + e, "Confirm",yesListen);
                 /** realse ui*/
                 showUI();
             }

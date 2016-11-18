@@ -12,4 +12,9 @@
     <string name="LEADER_BOARD">CgkI6u-z57kZEAIQAA</string>
 
 
+
+    <string name="achievement_reach_10_marks_in_speaking_quiz">CgkI6u-z57kZEAIQCQ</string>
+    <string name="achievement_reach_50_marks_in_speaking_quiz">CgkI6u-z57kZEAIQCg</string>
+    <string name="achievement_reach_100_marks_in_speaking_quiz">CgkI6u-z57kZEAIQCw</string>
+
 </resources>

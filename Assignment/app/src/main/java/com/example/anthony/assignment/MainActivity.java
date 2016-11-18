@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener, View.OnClickListener,
         OnShowcaseEventListener {
-    private GoogleApiClient mGoogleApiClient;
+    public GoogleApiClient mGoogleApiClient;
     private long mLastClickTime = 0;
     private com.wang.avi.AVLoadingIndicatorView prograss_indecator;
     private static int REQUEST_LEADERBOARD = 100; //  indeed an arbitrary int that you define by yourself.
@@ -258,7 +258,7 @@ public class MainActivity extends AppCompatActivity implements
             case 1:
                 showcaseView.setShowcase(new ViewTarget(findViewById(R.id.btn_quiz)), true);
                 showcaseView.setContentTitle("Quiz");  /** btn_quiz Title */
-                showcaseView.setContentText("Two quizzes to test you");  /** btn_quiz content */
+                showcaseView.setContentText("Quizzes to test you");  /** btn_quiz content */
                 break;
 
             case 2:
