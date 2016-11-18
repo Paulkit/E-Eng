@@ -3,8 +3,10 @@ package com.example.anthony.assignment;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -12,8 +14,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.games.Games;
+
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,7 +29,9 @@ import java.util.Random;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class Quiz2 extends AppCompatActivity {
+public class Quiz2 extends AppCompatActivity implements
+        GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener{
     private String path;
     private MediaPlayer mediaPlayer;
     Button button_Start, button_Submit;
@@ -32,6 +39,8 @@ public class Quiz2 extends AppCompatActivity {
     EditText et_Input;
     int score, life;
     String answer = "";
+
+    private GoogleApiClient mGoogleApiClient;
     ArrayList<String> words = new ArrayList<String>();
     ImageView button_Play;
     ArrayList<String> wrong = new ArrayList<String>();
@@ -47,6 +56,13 @@ public class Quiz2 extends AppCompatActivity {
         button_Submit = (Button) findViewById(R.id.button_Submit);
         textView2 = (TextView) findViewById(R.id.textView2);
         button_Start = (Button) findViewById(R.id.button_Start);
+
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(Games.API).addScope(Games.SCOPE_GAMES)
+                // add other APIs and scopes here as needed
+                .build();
 
 
     }
@@ -73,6 +89,17 @@ public class Quiz2 extends AppCompatActivity {
         if (et_Input.getText().toString().toLowerCase().equals(answer)) {
             et_Input.setText("");
             score++;
+
+            if(score==10){
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_Reach_10_listening));
+
+            }else if(score==50){
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_Reach_50_listening));
+
+            }else if(score==100){
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_Reach_100_listening));
+
+            }
             tv_Score.setText("Score: " + score);
             GenNewAnswer();
         } else {
@@ -91,6 +118,21 @@ public class Quiz2 extends AppCompatActivity {
 
         }
 
+
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
 

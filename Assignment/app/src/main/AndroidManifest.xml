@@ -33,11 +33,10 @@
         <activity android:name=".Quiz1Result" />
         <activity android:name=".Quiz2" />
         <activity android:name=".Records" />
-        <activity android:name=".RecordSearch" />
+        <activity android:name=".RecordSearch"/>
         <activity android:name=".TutorialsWordSelections" />
         <activity android:name=".TutorialsWord" />
         <activity android:name=".TutorialsSelections" />
-        <activity android:name=".Quiz3"></activity>
     </application>
 
 </manifest>

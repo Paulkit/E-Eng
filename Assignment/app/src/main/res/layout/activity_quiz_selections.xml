@@ -13,7 +13,7 @@
 
     <info.hoang8f.widget.FButton
         fbutton:buttonColor="@color/colorPrimary2"
-        fbutton:shadowColor="@color/colorPrimaryDark"
+        fbutton:shadowColor="@color/colorPrimary_Shadow"
         fbutton:shadowEnabled="true"
         fbutton:shadowHeight="5dp"
         fbutton:cornerRadius="5dp"
@@ -31,7 +31,7 @@
 
     <info.hoang8f.widget.FButton
         fbutton:buttonColor="@color/colorPrimary2"
-        fbutton:shadowColor="@color/colorPrimaryDark"
+        fbutton:shadowColor="@color/colorPrimary_Shadow"
         fbutton:shadowEnabled="true"
         fbutton:shadowHeight="5dp"
         fbutton:cornerRadius="5dp"

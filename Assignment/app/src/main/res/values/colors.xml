@@ -10,6 +10,8 @@
     <color name="bg">#fff</color>
     <color name="grey_bg">#dc000000</color>
     <color name="colorPrimary2">#5566c4</color>
+    <color name="colorPrimary_Shadow">#FF36407C</color>
+
 
 
     <color name="table_cell">@android:color/holo_orange_dark</color>
