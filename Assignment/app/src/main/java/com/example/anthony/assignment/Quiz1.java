@@ -61,7 +61,7 @@ public class Quiz1 extends AppCompatActivity   implements
     private int fileNumber = 0;
     private int diff = 1;
     Button button_Start,button_Submit;
-    TextView tv_Score, tv_Life, tv_Definitions, tv_Hints,textView2;
+    TextView tv_Score, tv_Life, tv_Definitions, tv_Hints,textView2, tvInstruction1, tvInstruction2, tvInstruction3, tvInstruction4, tvInstruction5;
     EditText et_Input;
     String domain = "";
     ArrayList<WordData> words = new ArrayList<WordData>();
@@ -71,6 +71,9 @@ public class Quiz1 extends AppCompatActivity   implements
     int score,life,index;
     boolean connected = false;
     private AlertDialog.Builder alert;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +86,13 @@ public class Quiz1 extends AppCompatActivity   implements
         et_Input = (EditText) findViewById(R.id.et_Input);
         button_Submit = (Button) findViewById(R.id.button_Submit);
         textView2 = (TextView) findViewById(R.id.textView2);
+        tvInstruction1 = (TextView) findViewById(R.id.tv_instruction1);
+        tvInstruction2 = (TextView) findViewById(R.id.tv_instruction2);
+        tvInstruction3 = (TextView) findViewById(R.id.tv_instruction3);
+        tvInstruction4 = (TextView) findViewById(R.id.tv_instruction4);
+        tvInstruction5 = (TextView) findViewById(R.id.tv_instruction5);
+
+
 
         alert = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.AppThemeNoActionBar));
         setTitle("Word Quiz");
@@ -123,6 +133,12 @@ public class Quiz1 extends AppCompatActivity   implements
         et_Input.setVisibility(View.VISIBLE);
         button_Submit.setVisibility(View.VISIBLE);
         textView2.setVisibility(View.INVISIBLE);
+
+        tvInstruction1.setVisibility(View.INVISIBLE);
+        tvInstruction2.setVisibility(View.INVISIBLE);
+        tvInstruction3.setVisibility(View.INVISIBLE);
+        tvInstruction4.setVisibility(View.INVISIBLE);
+        tvInstruction5.setVisibility(View.INVISIBLE);
 
         tv_Life.setText("Life: " + life);
         tv_Score.setText("Score: " + score);

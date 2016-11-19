@@ -36,7 +36,7 @@ public class Quiz2 extends AppCompatActivity implements
     private String path;
     private MediaPlayer mediaPlayer;
     Button button_Start, button_Submit;
-    TextView tv_Score, tv_Life, textView2;
+    TextView tv_Score, tv_Life, textView2, tv_instruction2_1,tv_instruction2_2,tv_instruction2_3,tv_instruction2_4,tv_instruction2_5;
     EditText et_Input;
     int score, life;
     String answer = "";
@@ -58,6 +58,11 @@ public class Quiz2 extends AppCompatActivity implements
         button_Submit = (Button) findViewById(R.id.button_Submit);
         textView2 = (TextView) findViewById(R.id.textView2);
         button_Start = (Button) findViewById(R.id.button_Start);
+        tv_instruction2_1 = (TextView) findViewById(R.id.tv_instruction2_1);
+        tv_instruction2_2 = (TextView) findViewById(R.id.tv_instruction2_2);
+        tv_instruction2_3 = (TextView) findViewById(R.id.tv_instruction2_3);
+        tv_instruction2_4 = (TextView) findViewById(R.id.tv_instruction2_4);
+        tv_instruction2_5 = (TextView) findViewById(R.id.tv_instruction2_5);
 
         //Check if connected
         if(App.getGoogleApiHelper().isConnected())
@@ -80,6 +85,13 @@ public class Quiz2 extends AppCompatActivity implements
         button_Submit.setVisibility(View.VISIBLE);
         textView2.setVisibility(View.INVISIBLE);
         button_Play.setVisibility(View.VISIBLE);
+
+        tv_instruction2_1.setVisibility(View.INVISIBLE);
+        tv_instruction2_2.setVisibility(View.INVISIBLE);
+        tv_instruction2_3.setVisibility(View.INVISIBLE);
+        tv_instruction2_4.setVisibility(View.INVISIBLE);
+        tv_instruction2_5.setVisibility(View.INVISIBLE);
+
         words = getStringFromFile("dictionary.txt");
         tv_Life.setText("Life: " + life);
         tv_Score.setText("Score: " + score);

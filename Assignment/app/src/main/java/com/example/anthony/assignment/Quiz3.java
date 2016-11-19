@@ -47,7 +47,7 @@ public class Quiz3 extends AppCompatActivity implements
     private TextView txtOutput,textView;
     private ImageButton btnMicrophone;  private Handler mHandler = new Handler();
     Button button_Start;
-    TextView tv_Score, tv_Life,tv_Question;
+    TextView tv_Score, tv_Life,tv_Question, tv_instruction3_1, tv_instruction3_2, tv_instruction3_3, tv_instruction3_4, tv_instruction3_5;
     int score, life;
     String answer = "";
     ArrayList<String> words = new ArrayList<String>();
@@ -74,6 +74,12 @@ public class Quiz3 extends AppCompatActivity implements
         tv_Question= (TextView) findViewById(R.id.tv_Question);
         textView= (TextView) findViewById(R.id.textView);
 
+        tv_instruction3_1 = (TextView) findViewById(R.id.tv_instruction3_1);
+        tv_instruction3_2 = (TextView) findViewById(R.id.tv_instruction3_2);
+        tv_instruction3_3 = (TextView) findViewById(R.id.tv_instruction3_3);
+        tv_instruction3_4 = (TextView) findViewById(R.id.tv_instruction3_4);
+        tv_instruction3_5 = (TextView) findViewById(R.id.tv_instruction3_5);
+
         //Check if connected
         if(App.getGoogleApiHelper().isConnected())
         {
@@ -97,6 +103,12 @@ public class Quiz3 extends AppCompatActivity implements
         words = getStringFromFile("dictionary.txt");
         tv_Life.setText("Life: " + life);
         tv_Score.setText("Score: " + score);
+
+        tv_instruction3_1.setVisibility(View.INVISIBLE);
+        tv_instruction3_2.setVisibility(View.INVISIBLE);
+        tv_instruction3_3.setVisibility(View.INVISIBLE);
+        tv_instruction3_4.setVisibility(View.INVISIBLE);
+        tv_instruction3_5.setVisibility(View.INVISIBLE);
 
         Log.i("Total of words", String.valueOf(words.size()));
         GenNewAnswer();
