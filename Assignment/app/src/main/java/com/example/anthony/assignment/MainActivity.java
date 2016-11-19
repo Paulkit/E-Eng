@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTitle("Learning English");
+        setTitle("E-Eng for Learning English");
         mContext = this;
         prograss_indecator = (com.wang.avi.AVLoadingIndicatorView) findViewById(R.id.avi);
         // Create the Google Api Client with access to the Play Games services
@@ -264,13 +264,6 @@ public class MainActivity extends AppCompatActivity implements
 
     }
 
-    private void setAlpha(float alpha, View... views) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            for (View view : views) {
-                view.setAlpha(alpha);
-            }
-        }
-    }
 
 
     @Override
@@ -284,13 +277,13 @@ public class MainActivity extends AppCompatActivity implements
 
             case 1:
                 showcaseView.setShowcase(new ViewTarget(findViewById(R.id.btn_quiz)), true);
-                showcaseView.setContentTitle("Quiz");  /** btn_quiz Title */
+                showcaseView.setContentTitle("Quizzes");  /** btn_quiz Title */
                 showcaseView.setContentText("Quizzes to test you");  /** btn_quiz content */
                 break;
 
             case 2:
               showcaseView.setShowcase(new ViewTarget(findViewById(R.id.btn_record)), true);
-                showcaseView.setContentText("A record of your wrong answer with a correct answer");  /** btn_record Title */
+                showcaseView.setContentText("A record of questions and words which the user done before");  /** btn_record Title */
                 showcaseView.setContentTitle("Answer Record");  /** btn_record content */
 
                 break;
@@ -298,7 +291,7 @@ public class MainActivity extends AppCompatActivity implements
             case 3:
                 showcaseView.setShowcase(new ViewTarget(findViewById(R.id.btn_highscore)), true);
                 showcaseView.setContentTitle("High Score");  /** btn_highscore Title */
-                showcaseView.setContentText("A leaderboard of two quizzes and the record of your achievements");  /** btn_highscore content */
+                showcaseView.setContentText("A leaderboard of users' score in all quizzes ");  /** btn_highscore content */
 
                 break;
 
