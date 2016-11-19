@@ -93,6 +93,8 @@ public class Quiz2 extends AppCompatActivity implements
             et_Input.setText("");
             score++;
 if(connected) {
+
+    Games.Leaderboards.submitScore(mGoogleApiClient,getString( R.string.LEADER_BOARD), score);
     if (score == 5) {
         Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_Reach_10_listening));
 

@@ -122,6 +122,8 @@ public class Quiz3 extends AppCompatActivity implements
             txtOutput.setText("");
             score++;
             if(connected) {
+
+                Games.Leaderboards.submitScore(mGoogleApiClient,getString( R.string.LEADER_BOARD), score);
                 if (score == 5) {
                     Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_reach_10_marks_in_speaking_quiz));
 
