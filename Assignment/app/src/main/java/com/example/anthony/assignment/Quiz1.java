@@ -67,7 +67,7 @@ public class Quiz1 extends AppCompatActivity   implements
     ArrayList<WordData> words = new ArrayList<WordData>();
     ArrayList<String> wrong = new ArrayList<String>();
     final String domains[] = {"Sport", "Art", "Literature", "Architecture"};
-    String answer ="";
+    String answer = "";
     int score,life,index;
     boolean connected = false;
     private AlertDialog.Builder alert;

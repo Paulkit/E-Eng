@@ -1,11 +1,14 @@
 package com.example.anthony.assignment;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.ContextThemeWrapper;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -38,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements
     private ShowcaseView showcaseView;
     private int counter = 0;
     boolean mInSignInFlow = false;
+
+    private AlertDialog.Builder alert;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements
                 // add other APIs and scopes here as needed
                 .build();
 
+        alert = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.AppThemeNoActionBar));
 
         //Check if connected
         if(App.getGoogleApiHelper().isConnected())
@@ -126,6 +132,8 @@ public class MainActivity extends AppCompatActivity implements
         } else {
             // not signed in. Show the "sign in" button and explanation.
             // ...
+
+            alertBuilderConfirm("Error occurred", "Google account not synchronized yet ", "Confirm",null);
         }
 
 
@@ -154,8 +162,18 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     public void showAchieve(View view) {
-        startActivityForResult(Games.Achievements.getAchievementsIntent(mGoogleApiClient),
-                101);
+
+        if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
+            startActivityForResult(Games.Achievements.getAchievementsIntent(mGoogleApiClient),
+                    101);
+        } else {
+            // not signed in. Show the "sign in" button and explanation.
+            // ...
+
+            alertBuilderConfirm("Error occurred", "Google account not synchronized yet ", "Confirm",null);
+        }
+
+
     }
 
 
@@ -301,6 +319,15 @@ public class MainActivity extends AppCompatActivity implements
         counter++;
     }
 
+    public void alertBuilderConfirm(String title, String msg, String yes, DialogInterface.OnClickListener yesListen) {
+        alert.setTitle(title);
+        alert.setMessage(msg);
+        alert.setCancelable(false);
+        alert.setPositiveButton(yes, yesListen);
+        alert.show();
+
+
+    }
 
     @Override
     public void onShowcaseViewHide(ShowcaseView showcaseView) {
