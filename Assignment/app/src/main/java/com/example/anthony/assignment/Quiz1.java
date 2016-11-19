@@ -458,8 +458,8 @@ public class Quiz1 extends AppCompatActivity   implements
         protected String doInBackground(String... params) {
             int progress = 0;
             //TODO: replace with your own app id and app key
-            final String app_id = "6d1da903";
-            final String app_key = "610188df55f40e7dc8135da75a622b58";
+            final String app_id = "11fc2c06";
+            final String app_key = "4f473db2deb74248730c7c0d178ce451";
             try {
                 URL url = new URL(params[0]);
                 HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
